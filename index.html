@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Isotopeia - v1.5.1</title>
+    <link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+    <div class="game">
+        <h1>Matter</h1>
+        <button id="elnncnplus" onclick='electronn(1);'>V<sub>e</sub> (Electron Neutrino)</button>
+            <br />
+            <button id="adde" disabled onclick="electron(1);">e<sup>-</sup> (Electron)</button>
+            <br />
+            <button id="addup" disabled onclick="upq(1);">u (Up quark)</button>
+            <h1>Upgrades</h1>
+            <div id="upgr">
+            </div>
+            <br />
+            </div>
+            <br />
+            <div class="stats" style="position: absolute; left: 20%; top: 0.01%;">
+                <h1>Stats</h1>
+                <h2>Clickable</h2>
+                <p><span id="elnncnt">0</span> V<sub>e</sub></p>
+                <p><span id="elncnt">0</span> e<sup>-</sup></p>
+                <p><span id="upqcnt">0</span> u</p>
+            </div>
+            <div class="sysinfo" style="position: absolute; left: 40%; top: 0.01%;">
+                <h1>System info</h1>
+                System info has been moved <a href="sysinfo.html">here</a>.<br />
+				<a href="modapi.html">Modding API</a><br />
+            </div>
+            <canvas id="bcham" width="500" height="500" style="align: right; position: absolute; top: 45%; left: 70%;">Your browser does not support the bubble chamber view.</canvas>
+            <h1>Options</h1>
+            <button onclick="save();">Save</button>
+			<br />
+			<button onclick="load();">Load</button>
+			<br />
+			<button onclick="if(document.getElementById('bcham').style.display == 'none'){document.getElementById('bcham').style.display = 'block'}else{document.getElementById('bcham').style.display = 'none'}">Toggle bubble chamber view</button>
+			<br />
+			<input type="text" id="modjson" />
+			<button onclick="parseToJs(document.getElementById('modjson').value)">Add mods</button>
+			<br />
+			<button onclick="confirmReset();" style="color: red;">Reset</button><br />
+			<button onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
+			<button onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
+			<br />
+			<input type="text" placeholder="Save import/export string" id="saveExportImport"></textarea>
+			<br />
+        </div>
+	<center><font size="2">This is the free demo result. For a full version of this website, please go to  <a href="https://www6.waybackmachinedownloader.com/website-downloader-online/scrape-all-files/">Website Downloader</a></font></center></body>
+	<div class="loading">
+	</div>
+	<!-- include index at end -->
+	<script src="loading.js"></script>
+	<script src="jtopia.js"></script>
+	<script src="index.js"></script>
+    <script src="buildinglib.js"></script>
+</html>
