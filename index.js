@@ -1,7 +1,4 @@
 var elncn,elnncn,upcn,bch,cph,lpc,ph,gl,wf,wf2,taucn,tuncn,muocn,muncn,cphc,lepc,radx,rady,timesdone;
-function rmCharAtI(value, index) {
-  return value.substring(0, index) + value.substring(index);
-}
 function init(){
     // clickable
      elncn = 0;
@@ -33,6 +30,7 @@ var ctx = ele.getContext('2d');
 var tosave = [];
 var toload = [""];
 var ran=false;
+var beatenGame = false;
 
 // funcs
 // saving/loading
@@ -41,6 +39,7 @@ function save() {
 	localStorage.setItem("upg", [cph,lpc,tosave]);
 	localStorage.setItem("cst", [cphc,lepc]);
 	localStorage.setItem("tl", "[" + JSON.stringify(toload) + "]");
+	localStorage.setItem("beaten_game", beatenGame ? "true" : "false");
 }
 function b64Encode( str ) {
   return window.btoa(unescape(encodeURIComponent( str )));
@@ -64,6 +63,7 @@ function load() {
 	var ucc = JSON.parse("[" + localStorage.getItem("ucc") + "]");
 	var upg = JSON.parse("[" + localStorage.getItem("upg").slice(0,-1) + "]");
 	var cst = JSON.parse("[" + localStorage.getItem("cst") + "]");
+	beatenGame = localStorage.getItem("beaten_game") == "true"; // just in case
 	elncn = ucc[0];
 	elnncn = ucc[1];
 	upcn = ucc[2];
@@ -83,7 +83,7 @@ function load() {
 	lepc = cst[1];
 	//make the vars work
 
-	try {toload = JSON.parse(JSON.parse(JSON.parse(rmCharAtI(localStorage.getItem("tl"), 3))[0])[0]);
+	try {toload = JSON.parse(JSON.parse(JSON.parse(localStorage.getItem("tl").substring(1)))[0])[0];
 		for(var i=0; i<toload.length; i++) {
 				try {
 					var tlR = eval(toload[i+1]);
@@ -155,10 +155,22 @@ function update() {
 	if(elncn >= 4.30528375734) {
 		document.getElementById("addup").removeAttribute("disabled");
 	}
+	if(elnncn >= 1e+22 && !beatenGame) {
+		setTimeout(() => {
+			document.querySelectorAll(".game").forEach((e) => {
+				e.style.display = "none";
+			})
+			document.body.style.backgroundColor = "black";
+			document.querySelectorAll(".end").forEach((e) => {
+				e.style.display = "block";
+			})
+		}, 200);
+	}
 }
 window.onload = function() {
 	// let's do this!
 	// format: (price, name, ps, id, rspot) increment rspot each one
+	beatenGame = localStorage.getItem("beaten_game") == "true"; // just in case
     var to;
     var x = 0;
     if(!ran) {
@@ -195,13 +207,119 @@ window.onload = function() {
     update();
 }
 function addEnItems() {
-	new BuildingEN(100, "Bubble chamber", 1, "bubbleChamber", 0).buildUI();
+	new BuildingU(10, "Quark generator", 10, "quarkGenerator", 12).buildUI();
+	new BuildingU(1000, "Matter converter", 1000, "matterConverter", 13).buildUI();
+	new BuildingU(100000, "Quark simulator", 100000, "quarkSimulator", 14).buildUI();
+	new BuildingU(1000000, "Quark fusor", 10000000000, "quarkFusor", 15).buildUI();
+	/*parseToJs(JSON.parse(`{
+    "buildings": {
+		"u": [
+			{
+                "price": 10,
+                "name": "Quark generator",
+                "perSecond": 10,
+                "id": "quarkGenerator"
+            },
+			{
+                "price": 1000,
+                "name": "Matter converter",
+                "perSecond": 1000,
+                "id": "rBDM"
+            },
+			{
+                "price": 100000,
+                "name": "Quark simulator",
+                "perSecond": 100000,
+                "id": "rBDM"
+            },
+			{
+                "price": 1000000,
+                "name": "Quark fusor",
+                "perSecond": 10000000000,
+                "id": "quarkFusor"
+            }
+		],
+        "e": [
+            {
+                "price": 100,
+                "name": "Radioactive beta decay machine",
+                "perSecond": 1,
+                "id": "rBDM"
+            },
+			{
+                "price": 1000,
+                "name": "Oudin coil",
+                "perSecond": 10,
+                "id": "oudinCoil"
+            },
+			{
+                "price": 10000,
+                "name": "Tesla coil",
+                "perSecond": 1000,
+                "id": "teslaCoil"
+            },
+			{
+                "price": 100000,
+                "name": "Marx generator",
+                "perSecond": 500000,
+                "id": "marxGen"
+            }
+        ],
+        "en": [
+            {
+                "price": 100,
+                "name": "Bubble chamber",
+                "perSecond": 1,
+                "id": "bubbleChamber"
+            },
+			{
+                "price": 5000,
+                "name": "Upgraded laboratory",
+                "perSecond": 50,
+                "id": "upgradedLab"
+            },
+			{
+                "price": 50000,
+                "name": "Fume hood",
+                "perSecond": 5000,
+                "id": "fumeHood"
+            },
+			{
+				"price": 50000000,
+                "name": "Extraterrestrial research facility",
+                "perSecond": 100000000000,
+                "id": "eTRF"
+			},
+			{
+				"price": 500000000000000,
+                "name": "Microcellular automata",
+                "perSecond": 1000000000000000,
+                "id": "mCA"
+			},
+			{
+				"price": 50000000000000000,
+                "name": "Hawking radiation simulation chamber",
+                "perSecond": 1000000000000000000,
+                "id": "hRSC"
+			},
+			{
+				"price": 500000000000000000000,
+                "name": "Black hole simulation chamber",
+                "perSecond": 100000000000000000000,
+                "id": "bHSC"
+			}
+        ]
+    }
+}
+`))*/
+new BuildingEN(100, "Bubble chamber", 1, "bubbleChamber", 0).buildUI();
     new BuildingEN(500, "Particle accelerator", 5, "particleAccel", 1).buildUI();
     new BuildingEN(5000, "Upgraded laboratory", 50, "upgradedLab", 2).buildUI();
     new BuildingEN(50000, "Fume hood", 5000, "fumeHood", 3).buildUI();
 	new BuildingEN(50000000, "Extraterrestrial research facility", 100000000000, "eTRF", 8).buildUI();
     new BuildingEN(500000000000000, "Microcellular automata", 1000000000000000, "mCA", 9).buildUI();
-    new BuildingEN(500000000000000000000, "Black hole simulation chamber", 100000000000000000000, "bHSC", 10).buildUI();
+	new BuildingEN(50000000000000000, "Hawking radiation simulation chamber", 1000000000000000000, "hRSC", 10).buildUI();
+    new BuildingEN(500000000000000000000, "Black hole simulation chamber", 100000000000000000000, "bHSC", 11).buildUI();
 }
 function addEItems() {
 	new BuildingE(100, "Radioactive beta decay machine", 1, "rBDM", 4).buildUI();
@@ -210,10 +328,10 @@ function addEItems() {
     new BuildingE(100000, "Marx generator", 500000, "marxGen", 7).buildUI();
 }
 function addUItems() {
-	new BuildingU(10, "Quark generator", 10, "quarkGenerator", 11).buildUI();
-	new BuildingU(1000, "Matter converter", 1000, "matterConverter", 12).buildUI();
-	new BuildingU(100000, "Quark simulator", 100000, "quarkSimulator", 13).buildUI();
-	new BuildingU(1000000, "Quark fusor", 10000000000, "quarkFusor", 14).buildUI();
+	new BuildingU(10, "Quark generator", 10, "quarkGenerator", 12).buildUI();
+	new BuildingU(1000, "Matter converter", 1000, "matterConverter", 13).buildUI();
+	new BuildingU(100000, "Quark simulator", 100000, "quarkSimulator", 14).buildUI();
+	new BuildingU(1000000, "Quark fusor", 10000000000, "quarkFusor", 15).buildUI();
 }
 function addSubsidies() {
     new Subsidy(100000000, "Automation setup", "autoSetup", 10000000000).buildUI();
