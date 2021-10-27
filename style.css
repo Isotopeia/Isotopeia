@@ -1,0 +1,9 @@
+body {
+	display: none;
+}
+.loading {
+	display: block;
+}
+.end {
+	display: none;
+}
