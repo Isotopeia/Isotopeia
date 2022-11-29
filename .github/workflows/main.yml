@@ -12,12 +12,18 @@ jobs:
         with:
           ref: "main"
 
-      - name: Minify Action
-        uses: anthonyftwang/minify-action@v1.0.1
+      - name: Auto Minify
+        uses: nizarmah/auto-minify@v2.1
+        with:
+          directory: '.'
+          output: 'docs'
+          js_engine: 'uglify-js'
+          maxdepth: 1
 
       # Auto-commit to repository
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          repository: 'docs'
           commit_message: Minify source code
           branch: minified
           push_options: '--force'
