@@ -25,6 +25,6 @@ jobs:
         with:
           repository: 'docs'
           commit_message: Minify source code
-          branch: main
+          branch: minified
           push_options: '--force'
           skip_checkout: true
