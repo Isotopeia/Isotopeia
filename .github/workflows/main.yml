@@ -17,7 +17,7 @@ jobs:
         with:
           directory: '.'
           output: 'docs'
-          js_engine: 'uglify-js'
+          js_engine: 'babel'
           maxdepth: 1
 
       # Auto-commit to repository
