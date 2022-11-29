@@ -20,4 +20,5 @@ jobs:
         with:
           commit_message: Minify source code
           branch: minified
-          commit_options: '--force'
+          push_options: '--force'
+          skip_checkout: true
