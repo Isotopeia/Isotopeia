@@ -10,7 +10,7 @@ jobs:
       # Checks-out your repository
       - uses: actions/checkout@v3
         with:
-          ref: "minified"
+          ref: "main"
 
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
