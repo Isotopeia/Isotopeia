@@ -23,7 +23,7 @@ jobs:
       # Auto-commit to repository
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          repository: 'docs'
+          repository: ''
           commit_message: Minify source code
           branch: minified
           push_options: '--force'
