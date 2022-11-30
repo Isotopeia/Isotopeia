@@ -16,8 +16,8 @@ jobs:
         uses: nizarmah/auto-minify@v2.1
         with:
           directory: '.'
-          output: 'docs'
-          js_engine: 'babel'
+          output: '.'
+          js_engine: 'uglify-js'
           maxdepth: 1
 
       # Auto-commit to repository
