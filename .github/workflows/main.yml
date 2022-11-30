@@ -19,6 +19,7 @@ jobs:
           output: '.'
           js_engine: 'uglify-js'
           maxdepth: 1
+          overwrite: true
 
       # Auto-commit to repository
       - uses: stefanzweifel/git-auto-commit-action@v4
