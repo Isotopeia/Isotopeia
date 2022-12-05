@@ -134,6 +134,12 @@ function addItems() {
     update()
 }
 
+var actuallySave = true;
 function confirmReset() {
+    actuallySave = false;
     confirm("Are you sure you want to reset the game? This is irreversible.") && (localStorage.setItem("ucc", [0, 0, 0]), localStorage.setItem("upg", [0, 0, []]), localStorage.setItem("cst", [0, 0]), localStorage.setItem("tl", '[[""]]'), localStorage.setItem("jtopia", "[]"), localStorage.setItem("prestige", "0"), location.reload())
+}
+// autosaving!
+window.onbeforeunload = function(){
+   if(actuallySave) save();
 }
