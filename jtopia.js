@@ -36,10 +36,11 @@
 	]
 }`
 */
-var crs = 16;
+var crs = 17;
 function parseToJs(jsonStr) {
+	var j;
 	try {
-		var j = JSON.parse(localStorage.getItem("jtopia"));
+		j = JSON.parse(localStorage.getItem("jtopia"));
 		j.push(JSON.parse(jsonStr));
 		localStorage.setItem("jtopia", JSON.stringify(j));
 	} catch {
@@ -50,40 +51,32 @@ function parseToJs(jsonStr) {
 	var li = [];
 	j.forEach((json) => {
 		var b = json.buildings == null ? {e:[], en:[]} : json.buildings;
-		var s = json.subsidies == null ? [{}] : json.subsidies;
-		console.log(s);
 		var cb = json.customBehaviors;
 		eval(cb);
 		var eb = b.e;
 		var enb = b.en;
 		var ub = b.u;
-		eb.forEach((i) => {
+		try{eb.forEach((i) => {
 			console.log("adding modded eb "+i.id);
 			var x=new BuildingE(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});
-		enb.forEach((i) => {
+		});}catch{console.log("no modded eb found")}
+		try{enb.forEach((i) => {
 			console.log("adding modded enb "+i.id);
 			var x=new BuildingEN(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});
-		ub.forEach((i) => {
+		});}catch{console.log("no modded enb found")}
+		try{ub.forEach((i) => {
 			console.log("adding modded ub "+i.id);
 			var x=new BuildingU(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});
-		s.forEach((i) => {
-			console.log("adding modded s "+i.id);
-			var x=new Subsidy(i.price, i.name, i.id, i.amount);
-			hooks.push(x);
-			li.push(x);
-		});
+		});}catch{console.log("no modded ub found")}
 	})
 	addItems();
 	return li;
