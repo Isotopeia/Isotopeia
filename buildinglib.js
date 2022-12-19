@@ -3,7 +3,8 @@ var prestigeCalc = (eln,elnn,up) => Math.floor(eln/1000000000+elnn/1000000000+Ma
 
 function confirmPrestige() {
     if(confirm("Are you sure you want to prestige? This is irreversible and you will gain "+prestigeCalc(elncn,elnncn,upcn).toString()+" prestige points.")) {
-        localStorage.setItem("ucc", [0, 0, 0])
+        actuallySave=false;
+	localStorage.setItem("ucc", [0, 0, 0])
         localStorage.setItem("upg", [0, 0, []])
         localStorage.setItem("cst", [0, 0])
         localStorage.setItem("tl", '[[""]]')
