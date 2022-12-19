@@ -35,6 +35,7 @@ function importSave(e) {
     var $ = JSON.parse(b64Decode(e));
     localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]), localStorage.setItem("tl", $[2]);
     localStorage.setItem("prestige", $[3]);
+    prestigeLevel = parseInt(localStorage.getItem("prestige"));
     try {
         load()
     } catch {
