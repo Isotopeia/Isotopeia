@@ -26,13 +26,15 @@ function b64Decode(e) {
 function exportSave() {
     return b64Encode(JSON.stringify([
         [elncn, elnncn, upcn],
-        [cph, lpc, tosave], "[" + JSON.stringify(toload) + "]"
+        [cph, lpc, tosave], "[" + JSON.stringify(toload) + "]",
+        localStorage.getItem("prestige")
     ]))
 }
 
 function importSave(e) {
     var $ = JSON.parse(b64Decode(e));
     localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]), localStorage.setItem("tl", $[2]);
+    localStorage.setItem("prestige", $[3]);
     try {
         load()
     } catch {
@@ -133,7 +135,6 @@ function addItems() {
     for (var e = 0; e < hooks.length; e++) hooks[e].buildUI();
     update()
 }
-
 var actuallySave = true;
 function confirmReset() {
     actuallySave = false;
