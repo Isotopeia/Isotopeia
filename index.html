@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Isotopeia - v1.8.1</title>
+	<title>Isotopeia - v1.8.3</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css"></link>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,35 +35,38 @@
             <div class="sysinfo" style="position: absolute; left: 40%; top: 0.01%;">
                 <h1>System info</h1>
                 System info has been moved <a href="sysinfo.html">here</a>.<br />
-				<a href="https://github.com/matthyno/Isotopeia/wiki/Modding-docs">Modding API</a><br />
+				<a href="./modapi.html">Modding API</a><br />
 				Here's <a href="https://github.com/matthyno/Isotopeia/wiki/Getting-Started">how to play</a> too. <br />
+                <a href="https://github.com/kateistrans/IsotopeiaMods">Mod repository</a> <br />
             </div>
             <canvas id="bcham" width="500" height="500" style="align: right; position: absolute; top: 45%; left: 70%;">Your browser does not support the bubble chamber view.</canvas>
             <h1>Options</h1>
-			<button onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
-			<br />
-            <button onclick="save();">Save</button>
-			<br />
-			<button onclick="load();">Load</button>
-			<br />
-			<button onclick="if(document.getElementById('bcham').style.display == 'none'){document.getElementById('bcham').style.display = 'block'}else{document.getElementById('bcham').style.display = 'none'}">Toggle bubble chamber view</button>
-			<br />
-			<input type="text" id="modjson" />
-			<button onclick="parseToJs(document.getElementById('modjson').value)">Add mods</button>
-			<br />
-			<button onclick="confirmReset();" style="color: red;">Reset</button><br />
-			<button onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
-			<button onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
-			<br />
-			<input type="text" placeholder="Save import/export string" id="saveExportImport"></textarea>
-			<br />
+    			<button onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
+    			<br />
+                <button onclick="save();">Save</button>
+    			<br />
+    			<button onclick="load();">Load</button>
+    			<br />
+    			<button onclick="if(document.getElementById('bcham').style.display == 'none'){document.getElementById('bcham').style.display = 'block'}else{document.getElementById('bcham').style.display = 'none'}">Toggle bubble chamber view</button>
+    			<br />
+    			<input type="text" id="modjson" />
+    			<button onclick="parseToJs(document.getElementById('modjson').value)">Add mods</button>
+    			<br />
+    			<button onclick="confirmReset();" style="color: red;">Reset</button><br />
+    			<button onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
+    			<button onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
+    			<br />
+    			<input type="text" placeholder="Save import/export string" id="saveExportImport"></textarea>
+    			<br />
+            <div id="optionsmenu" style="float: right; position: fixed; right: 20px; bottom: 20px;">
+            </div>
     </div>
 	<div class="end">
 		<p style="color: white;">You've done it. You've actually done it. I honestly thought noone would get here, but you did. Good game.<br /> -matthyno</p><br />
 		<button onclick="confirmReset();" style="color: red;">Reset</button><br /><button onclick="beatenGame=true;save();location.reload();">Continue endlessly</button>
 	</div>
 	</body>
-	<!-- include index at end  -->
+	<!-- include index at end -->
 	<script src="jtopia.js"></script>
 	<script src="index.js"></script>
     <script src="buildinglib.js"></script>
