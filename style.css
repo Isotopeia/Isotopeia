@@ -13,15 +13,15 @@
 .weight-b {
 	font-weight: 900;
 }
-
 .gain-clickable-button {
-	width: 75px;
-	height: 75px;
-	font-size: 200%;
-	background-color: black;
-	color: white;
-	border: 2px solid gray;
+    width: 100%;
+    font-size: 2rem;
+    color: black;
 }
+button {
+    touch-action: manipulation;
+}
+
 .gain-clickable-button:active {
 	background-color: gray;
 }
@@ -35,4 +35,48 @@
 a.dark {
 	background-color: black;
 	color: turquoise;
+}
+.frf {
+    position: fixed;
+}
+.blackcol {
+    color: black;
+}
+
+
+.redcol {
+    color: red;
+}
+
+@media (max-resolution: 1dppx) {
+    #optionsmenu {
+        float: right; 
+        position: fixed; 
+        right: 20px; 
+        bottom: 20px;
+    }
+    #bcham {
+        align: right; 
+        position: absolute; 
+        top: 45%; 
+        left: 70%;
+    }
+    #sysid {
+        position: absolute; 
+        left: 40%; 
+        top: 0.01%;
+    }
+    #statsid {
+        position: absolute; 
+        left: 20%;
+        top: 0.01%;
+    }
+    .gain-clickable-button {
+    	width: 75px;
+    	height: 75px;
+    	font-size: 200%;
+    	background-color: black;
+    	color: white;
+    	border: 2px solid gray;
+    }
 }
