@@ -1,4 +1,3 @@
-
 var prestigeCalc = (eln,elnn,up) => Math.floor(eln/1000000000+elnn/1000000000+Math.sqrt(up)/1000000000000000);
 
 function confirmPrestige() {
@@ -9,7 +8,7 @@ function confirmPrestige() {
         localStorage.setItem("cst", [0, 0])
         localStorage.setItem("tl", '[[""]]')
         localStorage.setItem("jtopia", "[]")
-        localStorage.setItem("prestige", localStorage.getItem("prestige") == null ? prestigeCalc(elncn,elnncn,upcn) :                       parseInt(localStorage.getItem("prestige"))+prestigeCalc(elncn,elnncn,upcn));
+        localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn,elnncn,upcn) :                       parseInt(localStorage.getItem("prestige"))+prestigeCalc(elncn,elnncn,upcn)).toLocaleString('fullwide', {useGrouping:false}));
         location.reload();
     }
     
@@ -58,18 +57,24 @@ class BuildingEN {
 			}
         });
     }
-    buy() {
-        if(elnncn >= this.price) {
-            elnncn -= this.price;
-            this.price = Math.floor(this.price *1.25);
-            document.getElementById(this.id+"uc").innerHTML = `${this.price} V<sub>e</sub> | Count: ${this.count+1}`;
-            document.getElementById(this.id).setAttribute("onclick", `new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy();  update();`);
-            this.interval();
-			tosave[this.rspot] += 1;
-			toload.push(`new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}')`);
-			save();
-        } else {
-            console.log("not enough");
+    buy(n = 1) {
+        var gg=0;
+        for(var i=0; i<n; i++) {
+            if(elnncn >= this.price) {
+                elnncn -= this.price;
+                this.price = Math.floor(this.price *1.25);
+                document.getElementById(this.id+"uc").innerHTML = `${this.price} V<sub>e</sub> | Count: ${this.count+1}`;
+                document.getElementById(this.id).setAttribute("onclick", `new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
+                this.interval();
+    			tosave[this.rspot] += 1;
+    			toload.push(`new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}')`);
+    			save();
+                gg++;
+            } else {
+                console.log("not enough");
+                break;
+            }
+            this.refreshCount(gg);
         }
     }
     interval() {
@@ -82,7 +87,7 @@ class BuildingEN {
         console.log(document.getElementById(this.id));
         if(document.getElementById(this.id) == null || isModded) {
             document.getElementById("upgr").insertAdjacentHTML('afterend', `
-            <button id="${this.id}" disabled onclick=" new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy();  update();" style="display: none;">${this.name}</button>
+            <button id="${this.id}" disabled onclick=" new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
             <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} V<sub>e</sub> | Count: ${this.count}</span></p>
             <br />`);
         } else {
@@ -121,18 +126,24 @@ class BuildingE {
 			}
         });
     }
-    buy() {
-        if(elncn >= this.price) {
-            elncn -= this.price;
-            this.price = Math.floor(this.price * 1.25);
-            document.getElementById(this.id+"uc").innerHTML = `${this.price} e<sup>-</sup> | Count: ${this.count+1}`;
-            document.getElementById(this.id).setAttribute("onclick", `new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy();  update();`);
-            this.interval();
-			tosave[this.rspot] += 1;
-			toload.push(`new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}')`);
-        } else {
-            console.log("not enough");
+    buy(n = 1) {
+        var gg=0;
+        for(var i=0; i<n; i++) {
+            if(elncn >= this.price) {
+                elncn -= this.price;
+                this.price = Math.floor(this.price * 1.25);
+                document.getElementById(this.id+"uc").innerHTML = `${this.price} e<sup>-</sup> | Count: ${this.count+1}`;
+                document.getElementById(this.id).setAttribute("onclick", `new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
+                this.interval();
+    			tosave[this.rspot] += 1;
+    			toload.push(`new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}')`);
+                gg++;
+            } else {
+                console.log("not enough");
+                break;
+            }
         }
+        this.refreshCount(gg);
     }
     interval() {
         window.setInterval(() => {
@@ -143,14 +154,14 @@ class BuildingE {
     buildUI(isModded = false) {
 		if(document.getElementById(this.id) == null || isModded) {
 			document.getElementById("upgr").insertAdjacentHTML('afterend', `
-			<button id="${this.id}" disabled onclick=" new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy();  update();" style="display: none;">${this.name}</button>
+			<button id="${this.id}" disabled onclick=" new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
 			<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} e<sup>-</sup> | Count: ${this.count}</span></p>
 			<br />`);
 		}
     }
-    refreshCount() {
+    refreshCount(n) {
 		this.count = countOf(this.id);
-		document.getElementById(this.id+"uc").innerHTML = `${this.price} e<sup>-</sup> | Count: ${this.count+1}`;
+		document.getElementById(this.id+"uc").innerHTML = `${this.price} e<sup>-</sup> | Count: ${this.count}`;
 	}
 }
 class BuildingU {
@@ -179,18 +190,24 @@ class BuildingU {
 			}
         });
     }
-    buy() {
-        if(upcn >= this.price) {
-            upcn -= this.price;
-            this.price = Math.floor(this.price * 1.25);
-            document.getElementById(this.id+"uc").innerHTML = `${this.price} u | Count: ${this.count+1}`;
-            document.getElementById(this.id).setAttribute("onclick", `new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy();  update();`);
-            this.interval();
-			tosave[this.rspot] += 1;
-			toload.push(`new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}')`);
-        } else {
-            console.log("not enough");
+    buy(n = 1) {
+        var gg=0;
+        for(var i=0; i<n; i++) {
+            if(upcn >= this.price) {
+                upcn -= this.price;
+                this.price = Math.floor(this.price * 1.25);
+                document.getElementById(this.id+"uc").innerHTML = `${this.price} u | Count: ${this.count+1}`;
+                document.getElementById(this.id).setAttribute("onclick", `new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
+                this.interval();
+    			tosave[this.rspot] += 1;
+    			toload.push(`new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}')`);
+                gg++;
+            } else {
+                console.log("not enough");
+                break
+            }
         }
+        this.refreshCount(gg);
     }
     interval() {
         window.setInterval(() => {
@@ -201,7 +218,7 @@ class BuildingU {
     buildUI(isModded = false) {
 		if(document.getElementById(this.id) == null || isModded) {
 			document.getElementById("upgr").insertAdjacentHTML('afterend', `
-			<button id="${this.id}" disabled onclick=" new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy();  update();" style="display: none;">${this.name}</button>
+			<button id="${this.id}" disabled onclick=" new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
 			<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} u | Count: ${this.count}</span></p>
 			<br />`);
 		}
