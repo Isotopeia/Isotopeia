@@ -74,7 +74,7 @@ class BuildingEN {
                 console.log("not enough");
                 break;
             }
-            this.refreshCount(gg);
+            this.refreshCount();
         }
     }
     interval() {
@@ -143,7 +143,7 @@ class BuildingE {
                 break;
             }
         }
-        this.refreshCount(gg);
+        this.refreshCount();
     }
     interval() {
         window.setInterval(() => {
@@ -207,7 +207,7 @@ class BuildingU {
                 break
             }
         }
-        this.refreshCount(gg);
+        this.refreshCount();
     }
     interval() {
         window.setInterval(() => {
