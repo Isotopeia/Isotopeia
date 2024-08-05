@@ -1,76 +1,83 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<title>Isotopeia - v1.9.1</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css"></link>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600;700;800&family=Oxygen+Mono&display=swap" rel="stylesheet">	
-	<link rel="stylesheet" href="https://raw.githubusercontent.com/tachyons-css/tachyons/master/css/tachyons.min.css"></link> 
-</head>
-
-    
-<body>
-    <div class="game oxygen">
-        <h1 class="weight-eb">Matter</h1>
-        <button class="gain-clickable-button oxygen" id="elnncnplus" onclick='electronn(1);'>V<sub>e</sub></button>
-        <br />
-        <button class="gain-clickable-button oxygen" id="adde" disabled onclick="electron(1);">e<sup>-</sup></button>
-        <br />
-        <button class="gain-clickable-button oxygen" id="addup" disabled onclick="upq(1);">u</button>
-        <h1>Upgrades</h1>
-        <input type="text" placeholder="Buy #" id="buyAmount" class="blackcol oxygen" value="1"/>
-        <div id="upgr">
-        </div>
-        <br />
-        <br />
-            <div id="statsid" class="stats">
-                <h1>Stats</h1>
-                <h2>Clickable</h2>
-                <p><span id="elnncnt">0</span> V<sub>e</sub></p>
-                <p><span id="elncnt">0</span> e<sup>-</sup></p>
-                <p><span id="upqcnt">0</span> u</p>
-                
-            </div>
-            <div class="sysinfo" id="sysid">
-                <h1>System info</h1>
-                System info has been moved <a href="sysinfo.html">here</a>.<br />
+	<head>
+		<title>Isotopeia - v1.10.0</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style-grid.css">
+		</link>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600;700;800&family=Oxygen+Mono&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://raw.githubusercontent.com/tachyons-css/tachyons/master/css/tachyons.min.css">
+		</link> 
+	</head>
+	<body>
+		<div class="game oxygen container">
+		<div class="main">
+			<div class="matter">
+				<h1 class="weight-eb matter-title">Matter</h1>
+				<div class="gain-clickable">
+					<button class="oxygen gain-clickable-button" id="elnncnplus" onclick='electronn(1);'>V<sub>e</sub></button>
+					<br />
+					<button class="oxygen gain-clickable-button" id="adde" disabled onclick="electron(1);">e<sup>-</sup></button>
+					<br />
+					<button class="oxygen gain-clickable-button" id="addup" disabled onclick="upq(1);">u</button>
+				</div>
+			</div>
+			<div id="upgr" class="upgrades">
+				<h1>Upgrades</h1>
+				<input type="number" placeholder="Buy #" id="buyAmount" class="blackcol oxygen buy-number" value="1" />
+			</div>
+		</div>
+		<div class="stats" id="statsid">
+			<h1>Stats</h1>
+			<h2>Clickable</h2>
+			<p><span id="elnncnt">0</span> V<sub>e</sub></p>
+			<p><span id="elncnt">0</span> e<sup>-</sup></p>
+			<p><span id="upqcnt">0</span> u</p>
+		</div>
+		<div class="sysinfo" id="sysid">
+			<div class="main-system-info">
+				<h1>System info</h1>
+				System info has been moved <a href="sysinfo.html">here</a>.<br />
 				<a href="./modapi.html">Modding API</a><br />
 				Here's <a href="https://github.com/matthyno/Isotopeia/wiki/Getting-Started">how to play</a> too. <br />
-                <a href="https://github.com/kateistrans/IsotopeiaMods">Mod repository</a> <br />
-            </div>
-            <canvas id="bcham" width="500" height="500">Your browser does not support the bubble chamber view.</canvas>
-            <h1>Options</h1>
-    			<button class="blackcol oxygen" onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
-    			<br />
-                <button class="blackcol oxygen" onclick="save();">Save</button>
-    			<br />
-    			<button class="blackcol oxygen" onclick="load();">Load</button>
-    			<br />
-    			<button class="blackcol oxygen" onclick="if(document.getElementById('bcham').style.display == 'none'){document.getElementById('bcham').style.display = 'block'}else{document.getElementById('bcham').style.display = 'none'}">Toggle bubble chamber view</button>
-    			<br />
-    			<input class="blackcol oxygen" type="text" id="modjson" />
-    			<button onclick="parseToJs(document.getElementById('modjson').value)" class="blackcol oxygen">Add mods</button>
-    			<br />
-    			<button onclick="confirmReset();" class="redcol oxygen">Reset</button><br />
-    			<button class="blackcol oxygen" onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
-    			<button class="blackcol oxygen"  onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
-    			<br />
-    			<input class="blackcol oxygen" type="text" placeholder="Save import/export string" id="saveExportImport" />
-    			<br />
-            <div id="optionsmenu">
-            </div>
-    </div>
-	<div class="end">
-		<p style="color: white;">You've done it. You've actually done it. I honestly thought no one would get here, but you did. Good game.<br /> -matthyno</p><br />
-		<button onclick="confirmReset();" style="color: red;">Reset</button><br /><button onclick="beatenGame=true;save();location.reload();">Continue endlessly</button>
-	</div>
+				<a href="https://github.com/kateistrans/IsotopeiaMods">Mod repository</a> <br />
+			</div>
+			<div id="optionsmenu" class="options">
+				<h1>Options</h1>
+				<button class="blackcol oxygen" onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
+				<br />
+				<button class="blackcol oxygen" onclick="save();">Save</button>
+				<br />
+				<button class="blackcol oxygen" onclick="load();">Load</button>
+				<br />
+				<button class="blackcol oxygen" onclick="if(document.getElementById('bcham').style.display == 'none'){document.getElementById('bcham').style.display = 'block'}else{document.getElementById('bcham').style.display = 'none'}">Toggle bubble chamber view</button>
+				<br />
+				<input class="blackcol oxygen" type="text" id="modjson" />
+				<button onclick="parseToJs(document.getElementById('modjson').value)" class="blackcol oxygen">Add mods</button>
+				<br />
+				<button onclick="confirmReset();" class="redcol oxygen">Reset</button><br />
+				<button class="blackcol oxygen" onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
+				<button class="blackcol oxygen"  onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
+				<br />
+				<input class="blackcol oxygen" type="text" placeholder="Save import/export string" id="saveExportImport" />
+				<br />
+			</div>
+		</div>
+		<div class="bubble-chamber">
+			<canvas id="bcham">Your browser does not support the bubble chamber view.</canvas>
+		</div>
+		<div class="end">
+			<p style="color: white;">You've done it. You've actually done it. I honestly thought no one would get here, but you did. gg.<br /> -mechanikate</p>
+			<br />
+			<button onclick="confirmReset();" style="color: red;">Reset</button><br /><button onclick="beatenGame=true;save();location.reload();">Continue endlessly</button>
+		</div>
 	</body>
 	<!-- include index at end -->
 	<script src="jtopia.js"></script>
 	<script src="index.js"></script>
-    <script src="buildinglib.js"></script>
-	
+	<script src="buildinglib.js"></script>
 </html>
+

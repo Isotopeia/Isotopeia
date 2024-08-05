@@ -68,9 +68,7 @@ function ellipse(e, $, t, n, a) {
 }
 
 function electronn(e) {
-    bch <= 16 && window.setTimeout(function() {
-        radx && rady <= 0 ? (ctx.fillStyle = "#FFFFFF", ctx.strokeStyle = "#FFFFFF", ctx.clearRect(0, 0, 500, 500), radx = 450, rady = 450, timesdone++) : (ctx.fillStyle = "", ctx.strokeStyle = "#0000FF", radx -= 25, rady -= 25), ellipse(ctx, 250, 250, radx, rady)
-    }, 1e3), elnncn += e, update()
+    elnncn += e, update()
 }
 
 function electron(e) {

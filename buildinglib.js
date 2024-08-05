@@ -86,10 +86,10 @@ class BuildingEN {
     buildUI(isModded = false) {
         console.log(document.getElementById(this.id));
         if(document.getElementById(this.id) == null || isModded) {
-            document.getElementById("upgr").insertAdjacentHTML('afterend', `
+            document.getElementById("upgr").innerHTML+=`<p>
             <button id="${this.id}" disabled onclick=" new BuildingEN(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
             <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} V<sub>e</sub> | Count: ${this.count}</span></p>
-            <br />`);
+            </p>`;
         } else {
             console.log("buildUI exists");
         }
@@ -153,10 +153,10 @@ class BuildingE {
     }
     buildUI(isModded = false) {
 		if(document.getElementById(this.id) == null || isModded) {
-			document.getElementById("upgr").insertAdjacentHTML('afterend', `
+			document.getElementById("upgr").innerHTML+=`<p>
 			<button id="${this.id}" disabled onclick=" new BuildingE(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
 			<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} e<sup>-</sup> | Count: ${this.count}</span></p>
-			<br />`);
+			</p>`;
 		}
     }
     refreshCount(n) {
@@ -217,10 +217,10 @@ class BuildingU {
     }
     buildUI(isModded = false) {
 		if(document.getElementById(this.id) == null || isModded) {
-			document.getElementById("upgr").insertAdjacentHTML('afterend', `
+			document.getElementById("upgr").innerHTML+=`<p>
 			<button id="${this.id}" disabled onclick=" new BuildingU(${this.price}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
 			<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} u | Count: ${this.count}</span></p>
-			<br />`);
+			</p>`;
 		}
     }
     refreshCount() {

@@ -1,0 +1,60 @@
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.8fr 1.2fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "main stats sysinfo"
+    "main . sysinfo"
+    "main . sysinfo";
+}
+
+.main {  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.6fr 1.8fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "matter"
+    "upgrades";
+  grid-area: main;
+}
+
+.upgrades { grid-area: upgrades; }
+
+.matter {  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.9fr 1.1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "matter-title"
+    "gain-clickable"
+    "gain-clickable";
+  grid-area: matter;
+}
+
+.matter-title { grid-area: matter-title; }
+
+.gain-clickable { grid-area: gain-clickable; }
+
+.sysinfo {  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "main-system-info"
+    "main-system-info"
+    "options";
+  grid-area: sysinfo;
+}
+
+.options { grid-area: options; }
+
+.main-system-info { grid-area: main-system-info; }
+
+.bubble-chamber { grid-area: bubble-chamber; }
+
+.stats { grid-area: stats; }
+
