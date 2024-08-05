@@ -14,58 +14,59 @@
 	</head>
 	<body>
 		<div class="game oxygen container">
-		<div class="main">
-			<div class="matter">
-				<h1 class="weight-eb matter-title">Matter</h1>
-				<div class="gain-clickable">
-					<button class="oxygen gain-clickable-button" id="elnncnplus" onclick='electronn(1);'>V<sub>e</sub></button>
-					<br />
-					<button class="oxygen gain-clickable-button" id="adde" disabled onclick="electron(1);">e<sup>-</sup></button>
-					<br />
-					<button class="oxygen gain-clickable-button" id="addup" disabled onclick="upq(1);">u</button>
+			<div class="main">
+				<div class="matter">
+					<h1 class="weight-eb matter-title">Matter</h1>
+					<div class="gain-clickable">
+						<button class="oxygen gain-clickable-button" id="elnncnplus" onclick='electronn(1);'>V<sub>e</sub></button>
+						<br />
+						<button class="oxygen gain-clickable-button" id="adde" disabled onclick="electron(1);">e<sup>-</sup></button>
+						<br />
+						<button class="oxygen gain-clickable-button" id="addup" disabled onclick="upq(1);">u</button>
+					</div>
+				</div>
+				<div id="upgr" class="upgrades">
+					<h1>Upgrades</h1>
+					<input type="number" placeholder="Buy #" id="buyAmount" class="blackcol oxygen buy-number" value="1" />
 				</div>
 			</div>
-			<div id="upgr" class="upgrades">
-				<h1>Upgrades</h1>
-				<input type="number" placeholder="Buy #" id="buyAmount" class="blackcol oxygen buy-number" value="1" />
+			<div class="stats" id="statsid">
+				<h1>Stats</h1>
+				<h2>Clickable</h2>
+				<p><span id="elnncnt">0</span> V<sub>e</sub></p>
+				<p><span id="elncnt">0</span> e<sup>-</sup></p>
+				<p><span id="upqcnt">0</span> u</p>
 			</div>
-		</div>
-		<div class="stats" id="statsid">
-			<h1>Stats</h1>
-			<h2>Clickable</h2>
-			<p><span id="elnncnt">0</span> V<sub>e</sub></p>
-			<p><span id="elncnt">0</span> e<sup>-</sup></p>
-			<p><span id="upqcnt">0</span> u</p>
-		</div>
-		<div class="sysinfo" id="sysid">
-			<div class="main-system-info">
-				<h1>System info</h1>
-				System info has been moved <a href="sysinfo.html">here</a>.<br />
-				<a href="./modapi.html">Modding API</a><br />
-				Here's <a href="https://github.com/matthyno/Isotopeia/wiki/Getting-Started">how to play</a> too. <br />
-				<a href="https://github.com/kateistrans/IsotopeiaMods">Mod repository</a> <br />
+			<div class="sysinfo" id="sysid">
+				<div class="main-system-info">
+					<h1>System info</h1>
+					System info has been moved <a href="sysinfo.html">here</a>.<br />
+					<a href="./modapi.html">Modding API</a><br />
+					Here's <a href="https://github.com/matthyno/Isotopeia/wiki/Getting-Started">how to play</a> too. <br />
+					<a href="https://github.com/kateistrans/IsotopeiaMods">Mod repository</a> <br />
+				</div>
+				<div id="optionsmenu" class="options">
+					<h1>Options</h1>
+					<button class="blackcol oxygen" onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
+					<br />
+					<button class="blackcol oxygen" onclick="save();">Save</button>
+					<br />
+					<button class="blackcol oxygen" onclick="load();">Load</button>
+					<br />
+					<input class="blackcol oxygen" type="text" id="modjson" />
+					<button onclick="parseToJs(document.getElementById('modjson').value)" class="blackcol oxygen">Add mods</button>
+					<br />
+					<button onclick="confirmReset();" class="redcol oxygen">Reset</button><br />
+					<button class="blackcol oxygen" onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
+					<button class="blackcol oxygen"  onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
+					<br />
+					<input class="blackcol oxygen" type="text" placeholder="Save import/export string" id="saveExportImport" />
+					<br />
+				</div>
 			</div>
-			<div id="optionsmenu" class="options">
-				<h1>Options</h1>
-				<button class="blackcol oxygen" onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
-				<br />
-				<button class="blackcol oxygen" onclick="save();">Save</button>
-				<br />
-				<button class="blackcol oxygen" onclick="load();">Load</button>
-				<br />
-				<input class="blackcol oxygen" type="text" id="modjson" />
-				<button onclick="parseToJs(document.getElementById('modjson').value)" class="blackcol oxygen">Add mods</button>
-				<br />
-				<button onclick="confirmReset();" class="redcol oxygen">Reset</button><br />
-				<button class="blackcol oxygen" onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
-				<button class="blackcol oxygen"  onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
-				<br />
-				<input class="blackcol oxygen" type="text" placeholder="Save import/export string" id="saveExportImport" />
-				<br />
+			<div class="bubble-chamber">
+				<canvas id="bcham">Your browser does not support the bubble chamber view.</canvas>
 			</div>
-		</div>
-		<div class="bubble-chamber">
-			<canvas id="bcham">Your browser does not support the bubble chamber view.</canvas>
 		</div>
 		<div class="end">
 			<p style="color: white;">You've done it. You've actually done it. I honestly thought no one would get here, but you did. gg.<br /> -mechanikate</p>
