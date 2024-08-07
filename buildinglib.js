@@ -28,7 +28,7 @@ function countAll() {
 		var x = e.replace(/(new Building[A-Z]+)?/g, "")
 		//console.log("["+x.replace(/\'/g, "\"").substring(1, x.length-1)+"]"
 		const id = JSON.parse("["+x.replace(/\'/g, "\"").substring(1, x.length-1)+"]")[3];
-		if(getCounts(id)==undefined) getCounts(id)=0;
+		if(getCounts(id)==undefined) buildingCounts[id]=0;
 		getCounts(id)++;
 		count++;
 		getCounts(id)++;
