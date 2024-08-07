@@ -57,26 +57,23 @@ function parseToJs(jsonStr) {
 		var enb = b.en;
 		var ub = b.u;
 		try{eb.forEach((i) => {
-			console.log("adding modded eb "+i.id);
 			var x=new BuildingE(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});}catch{console.log("no modded eb found")}
+		});}catch{}
 		try{enb.forEach((i) => {
-			console.log("adding modded enb "+i.id);
 			var x=new BuildingEN(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});}catch{console.log("no modded enb found")}
+		});}catch{}
 		try{ub.forEach((i) => {
-			console.log("adding modded ub "+i.id);
 			var x=new BuildingU(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});}catch{console.log("no modded ub found")}
+		});}catch{}
 	})
 	addItems();
 	return li;

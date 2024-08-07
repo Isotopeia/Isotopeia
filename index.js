@@ -1,7 +1,8 @@
-var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, taucn, tuncn, muocn, muncn, cphc, lepc, radx, rady, timesdone, dark = !1;
+var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, taucn, tuncn, muocn, muncn, cphc, lepc, radx, rady, timesdone, dark = !1, buildingCounts;
+const mostRecentVersion = "v1.11.0";
 
 function init() {
-    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, taucn = 0, tuncn = 0, muocn = 0, muncn = 0, cphc = 500, lepc = 1e3, radx = 400, rady = 400, timesdone = 0
+    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, taucn = 0, tuncn = 0, muocn = 0, muncn = 0, cphc = 500, lepc = 1e3, radx = 400, rady = 400, timesdone = 0, buildingCounts = {}
 }
 init();
 var ele = document.getElementById("bcham"),
@@ -12,7 +13,7 @@ var ele = document.getElementById("bcham"),
     beatenGame = !1;
 
 function save() {
-    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", [cph, lpc, tosave]), localStorage.setItem("cst", [cphc, lepc]), localStorage.setItem("tl", "[" + JSON.stringify(toload) + "]"), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false")
+    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", [cph, lpc, tosave]), localStorage.setItem("cst", [cphc, lepc]), localStorage.setItem("tl", "[" + JSON.stringify(toload) + "]"), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
 }
 
 function b64Encode(e) {
@@ -27,7 +28,8 @@ function exportSave() {
     return b64Encode(JSON.stringify([
         [elncn, elnncn, upcn],
         [cph, lpc, tosave], "[" + JSON.stringify(toload) + "]",
-        localStorage.getItem("prestige")
+        localStorage.getItem("prestige"),
+	localStorage.getItem("counts")
     ]))
 }
 
@@ -35,6 +37,7 @@ function importSave(e) {
     var $ = JSON.parse(b64Decode(e));
     localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]), localStorage.setItem("tl", $[2]);
     localStorage.setItem("prestige", $[3].toLocaleString('fullwide', {useGrouping:false}));
+    localStorage.setItem("counts", $[4]);
     prestigeLevel = parseInt(localStorage.getItem("prestige"));
     try {
         load()
@@ -47,10 +50,12 @@ function importSave(e) {
 function load() {
     var ucc = JSON.parse("[" + localStorage.getItem("ucc") + "]"),
         upg = JSON.parse("[" + localStorage.getItem("upg").slice(0, -1) + "]"),
-        cst = JSON.parse("[" + localStorage.getItem("cst") + "]");
+        cst = JSON.parse("[" + localStorage.getItem("cst") + "]"),
+	bcs = JSON.parse(localStorage.getItem("counts"));
     beatenGame = "true" == localStorage.getItem("beaten_game"), (dark = "true" == localStorage.getItem("dark_mode")) ? document.body.classList.add("dark") : document.body.classList.remove("dark"), elncn = ucc[0], elnncn = ucc[1], upcn = ucc[2], ph = ucc[3], gl = ucc[4], wf = ucc[5], wf2 = ucc[6], taucn = ucc[7], tuncn = ucc[8], muocn = ucc[9], muncn = ucc[10], cph = upg[0], lpc = upg[1], cphc = cst[0], lepc = cst[1];
+    buildingCounts = bcs != null ? bcs : {};
     try {
-        toload =  JSON.parse(localStorage.getItem("tl"))[0];
+        toload = JSON.parse(localStorage.getItem("tl"))[0];
         for (var i = 1; i < toload.length; i++) try {
             var tlR = eval(toload[i]);
             tlR.interval(), tlR.buildUI(), tlR.refreshCount()
@@ -63,9 +68,6 @@ function load() {
     hooks = parseToJs(localStorage.getItem("jtopia")), addItems(), ran = !0, update()
 }
 
-function ellipse(e, $, t, n, a) {
-    e.save(), e.beginPath(), e.translate($ - n, t - a), e.scale(n, a), e.arc(1, 1, 1, 0, 2 * Math.PI, !1), e.restore(), e.stroke()
-}
 
 function electronn(e) {
     elnncn += e, update()
@@ -120,12 +122,14 @@ window.onload = function() {
                 } catch {}
             }
             let unique = [...new Set(tmp)];
-            console.log(unique);
             for (var n = 0; n < tmp.length; n++) eval(toload[tmp.lastIndexOf(unique[n])]).buildUI()
         } catch {}
         addItems()
+	load();
     }
     null == elnncn && (elnncn = 0), update()
+    migrationProcessor(localStorage.getItem("version"));
+    document.getElementById("titleHTML").innerHTML=`Isotopeia - ${mostRecentVersion}`;
 };
 var hooks = [];
 
@@ -137,9 +141,17 @@ function addItems() {
 var actuallySave = true;
 function confirmReset() {
     actuallySave = false;
-    confirm("Are you sure you want to reset the game? This is irreversible.") && (localStorage.setItem("ucc", [0, 0, 0]), localStorage.setItem("upg", [0, 0, []]), localStorage.setItem("cst", [0, 0]), localStorage.setItem("tl", '[[""]]'), localStorage.setItem("jtopia", "[]"), localStorage.setItem("prestige", "0"), location.reload())
+    confirm("Are you sure you want to reset the game? This is irreversible.") && (localStorage.setItem("ucc", [0, 0, 0]), localStorage.setItem("upg", [0, 0, []]), localStorage.setItem("cst", [0, 0]), localStorage.setItem("tl", '[[""]]'), localStorage.setItem("jtopia", "[]"), localStorage.setItem("prestige", "0"), localStorage.setItem("counts", "{}"), localStorage.setItem("version", "v1.11.0"), location.reload())
 }
 // autosaving!
 window.onbeforeunload = function(){
    if(actuallySave) save();
+}
+function migrationProcessor(version) {
+	if(version == null || version == undefined) { // v1.10.0-->v1.11.0+ migration
+		console.log("Migrating from v1.10.0...");
+		countAll();
+		console.log("Done!");
+	}
+	localStorage.setItem("version", mostRecentVersion);
 }
