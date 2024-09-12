@@ -94,16 +94,10 @@ function update() {
     }, 200)
 }
 
-function addEnItems() {
-    new BuildingEN(100, "Bubble chamber", 1, "bubbleChamber", 0).buildUI(), new BuildingEN(500, "Particle accelerator", 5, "particleAccel", 1).buildUI(), new BuildingEN(5e3, "Upgraded laboratory", 50, "upgradedLab", 2).buildUI(), new BuildingEN(5e4, "Fume hood", 5e3, "fumeHood", 3).buildUI(), new BuildingEN(5e7, "Extraterrestrial research facility", 1e11, "eTRF", 8).buildUI(), new BuildingEN(5e14, "Microcellular automata", 1e15, "mCA", 9).buildUI(), new BuildingEN(5e16, "Hawking radiation simulation chamber", 1e18, "hRSC", 10).buildUI(), new BuildingEN(5e20, "Black hole simulation chamber", 1e20, "bHSC", 11).buildUI()
-}
-
-function addEItems() {
-    new BuildingE(100, "Radioactive beta decay machine", 1, "rBDM", 4).buildUI(), new BuildingE(1e3, "Oudin coil", 10, "oudinCoil", 5).buildUI(), new BuildingE(1e4, "Tesla coil", 1e3, "teslaCoil", 6).buildUI(), new BuildingE(1e5, "Marx generator", 5e5, "marxGen", 7).buildUI()
-}
-
-function addUItems() {
-    new BuildingU(10, "Quark generator", 10, "quarkGenerator", 12).buildUI(), new BuildingU(1e3, "Matter converter", 1e3, "matterConverter", 13).buildUI(), new BuildingU(1e5, "Quark simulator", 1e5, "quarkSimulator", 14).buildUI(), new BuildingU(1e6, "Quark fusor", 1e10, "quarkFusor", 15).buildUI(), new BuildingU(2e14, "Quark collision chamber", 1e16, "bQCC", 17).buildUI()
+function stockBuildings() {
+	parseToJs(
+		{"buildings":{"en":[{"price":100,"name":"Bubble chamber","perSecond":1,"id":"bubbleChamber"},{"price":500,"name":"Particle accelerator","perSecond":5,"id":"particleAccelerator"},{"price":5000,"name":"Upgraded laboratory","perSecond":50,"id":"upgradedLaboratory"},{"price":50000,"name":"Fume hood","perSecond":5000,"id":"fumeHood"},{"price":50000000,"name":"Extraterrestiral research facility","perSecond":100000000000,"id":"extraTerraResearchFacility"},{"price":500000000000000,"name":"Microcellular automata","perSecond":1000000000000000,"id":"microAutomata"},{"price":50000000000000000,"name":"Hawking radiaton simulation chamber","perSecond":1000000000000000000,"id":"hawkingSimChamber"},{"price":500000000000000000000,"name":"Black hole simulation chamber","perSecond":100000000000000000000,"id":"blackHoleSimChamber"}],"e":[{"price":100,"name":"Radioactive beta decay machine","perSecond":1,"id":"radioactiveBetaDecayMachine"},{"price":1000,"name":"Oudin coil","perSecond":10,"id":"oudinCoil"},{"price":10000,"name":"Tesla coil","perSecond":1000,"id":"teslaCoil"},{"price":100000,"name":"Marx generator","perSecond":500000,"id":"marxGenerator"},{"price":200000000,"name":"Nuclear reactor","perSecond":10000000,"id":"nuclearReactor"}]},"customBehaviors":""}
+	);
 }
 window.onload = function() {
     beatenGame = "true" == localStorage.getItem("beaten_game");
@@ -134,9 +128,9 @@ window.onload = function() {
 var hooks = [];
 
 function addItems() {
-    addEnItems(), addEItems(), addUItems();
+    stockBuildings();
     for (var e = 0; e < hooks.length; e++) hooks[e].buildUI();
-    update()
+    update();
 }
 var actuallySave = true;
 function confirmReset() {
