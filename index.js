@@ -1,5 +1,5 @@
 var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, taucn, tuncn, muocn, muncn, cphc, lepc, radx, rady, timesdone, dark = !1, buildingCounts;
-const mostRecentVersion = "v1.11.0";
+const mostRecentVersion = "v1.11.1";
 
 function init() {
     elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, taucn = 0, tuncn = 0, muocn = 0, muncn = 0, cphc = 500, lepc = 1e3, radx = 400, rady = 400, timesdone = 0, buildingCounts = {}
