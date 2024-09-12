@@ -1,8 +1,8 @@
-var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, taucn, tuncn, muocn, muncn, cphc, lepc, radx, rady, timesdone, dark = !1, buildingCounts;
+var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, timesdone, dark = !1, cphc, lpc, buildingCounts;
 const mostRecentVersion = "v1.11.1";
 
 function init() {
-    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, taucn = 0, tuncn = 0, muocn = 0, muncn = 0, cphc = 500, lepc = 1e3, radx = 400, rady = 400, timesdone = 0, buildingCounts = {}
+    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, rady = 400, timesdone = 0, buildingCounts = {}, cphc = 500, lpc = 0;
 }
 init();
 var ele = document.getElementById("bcham"),
@@ -12,8 +12,8 @@ var ele = document.getElementById("bcham"),
     ran = !1,
     beatenGame = !1;
 
-function save() {
-    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", [cph, lpc, tosave]), localStorage.setItem("cst", [cphc, lepc]), localStorage.setItem("tl", "[" + JSON.stringify(toload) + "]"), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
+function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
+    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", [cph, lpc, tosave]), localStorage.setItem("cst", [cphc, lepc]), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
 }
 
 function b64Encode(e) {
@@ -27,7 +27,7 @@ function b64Decode(e) {
 function exportSave() {
     return b64Encode(JSON.stringify([
         [elncn, elnncn, upcn],
-        [cph, lpc, tosave], "[" + JSON.stringify(toload) + "]",
+        [cph, lpc, tosave], [],
         localStorage.getItem("prestige"),
 	localStorage.getItem("counts")
     ]))
@@ -35,7 +35,7 @@ function exportSave() {
 
 function importSave(e) {
     var $ = JSON.parse(b64Decode(e));
-    localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]), localStorage.setItem("tl", $[2]);
+    localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]); // , localStorage.setItem("tl", $[2]);
     localStorage.setItem("prestige", $[3].toLocaleString('fullwide', {useGrouping:false}));
     localStorage.setItem("counts", $[4]);
     prestigeLevel = parseInt(localStorage.getItem("prestige"));
