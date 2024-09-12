@@ -1,0 +1,87 @@
+{
+    "buildings":{
+        "en":[
+            {
+                "price":100,
+                "name":"Bubble chamber",
+                "perSecond":1,
+                "id":"bubbleChamber"
+            },
+	        {
+	            "price":500,
+		        "name":"Particle accelerator", 
+		        "perSecond": 5,
+		        "id": "particleAccelerator"
+	        },
+	        {   
+	            "price": 5e3,
+	            "name": "Upgraded laboratory",
+	            "perSecond": 50,
+	            "id": "upgradedLaboratory"
+	        },
+	        {
+	            "price": 5e4,
+	            "name": "Fume hood",
+	            "perSecond": 5e3,
+	            "id": "fumeHood"
+	        },
+	        {
+	            "price": 5e7,
+	            "name": "Extraterrestiral research facility",
+	            "perSecond": 1e11,
+	            "id": "extraTerraResearchFacility"
+	        },
+	        {
+	            "price": 5e14,
+	            "name": "Microcellular automata",
+	            "perSecond": 1e15,
+	            "id": "microAutomata"
+	        },
+	        {
+	            "price": 5e16,
+	            "name": "Hawking radiaton simulation chamber",
+	            "perSecond": 1e18,
+	            "id": "hawkingSimChamber"
+	        },
+	        {
+	            "price": 5e20,
+	            "name": "Black hole simulation chamber",
+	            "perSecond": 1e20,
+	            "id": "blackHoleSimChamber"
+	        }
+        ],
+        "e":[
+            {
+                "price":100,
+                "name":"Radioactive beta decay machine",
+                "perSecond":1,
+                "id":"radioactiveBetaDecayMachine"
+            },
+            {
+                "price": 1e3,
+                "name": "Oudin coil",
+                "perSecond": 10,
+                "id": "oudinCoil"
+            },
+            {
+                "price": 1e4,
+                "name": "Tesla coil",
+                "perSecond": 1e3,
+                "id": "teslaCoil"
+            },
+            {
+                "price": 1e5,
+                "name": "Marx generator",
+                "perSecond": 5e5,
+                "id": "marxGenerator"
+            },
+            {
+                "price": 2e8,
+                "name": "Nuclear reactor",
+                "perSecond": 1e7,
+                "id": "nuclearReactor"
+            }
+        ]
+    },
+    "customBehaviors":""
+}
