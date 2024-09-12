@@ -1,42 +1,4 @@
-/*
-`{
-	"buildings": {
-		"e": [
-			{
-				"price": 1000000000000,
-				"name": "Quantum photon simulator",
-				"perSecond": 100000,
-				"id": "quPhotonSimulator"
-			}
-		],
-		"en": [
-			{
-				"price": 1000000000000,
-				"name": "Quantum computer",
-				"perSecond": 100000,
-				"id": "quComputer"
-			}
-		],
-		"u": [
-			{
-				"price": 1000,
-				"name": "Up-quark simulator",
-				"perSecond": 1000,
-				"id": "upQuarkSimulator"
-			}
-		]
-	},
-	"subsidies": [
-		{
-			"price":100000000,
-			"name":"Construction project contribution",
-			"id":"constructionProjectContribution",
-			"amount":100000000
-		}
-	]
-}`
-*/
-var crs = 17;
+var crs = 0;
 function parseToJs(jsonStr) {
 	var j;
 	try {
