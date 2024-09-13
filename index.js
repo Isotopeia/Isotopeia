@@ -57,7 +57,7 @@ function load() {
         toload = JSON.parse(localStorage.getItem("tl"))[0];
         for (var i = 1; i < toload.length; i++) try {
             var tlR = eval(toload[i]);
-            tlR.interval(), tlR.buildUI(), tlR.refreshCount()
+           tlR.buildUI(), tlR.refreshCount();
         } catch (e) {
             console.log(e.message)
         }
