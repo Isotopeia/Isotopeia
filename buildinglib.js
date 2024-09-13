@@ -107,7 +107,10 @@ class BuildingEN {
 		this.count = getCounts(this.id);
 		document.getElementById(this.id+"uc").innerHTML = `${this.price} V<sub>e</sub> | Count: ${this.count}`;
 	}
-
+	refreshIntervals() {
+	this.refreshCount();
+	for(var i=0; i<this.count; i++) this.interval();
+   }
 }
 class BuildingE {
     constructor(price, name, ps, id, rspot) {
@@ -171,10 +174,14 @@ class BuildingE {
 			</p>`;
 		}
     }
-    refreshCount(n) {
+    refreshCount() {
 		this.count = getCounts(this.id);
 		document.getElementById(this.id+"uc").innerHTML = `${this.price} e<sup>-</sup> | Count: ${this.count}`;
-	}
+	}	
+   refreshIntervals() {
+	this.refreshCount();
+	for(var i=0; i<this.count; i++) this.interval();
+   }
 }
 class BuildingU {
     constructor(price, name, ps, id, rspot) {
@@ -242,4 +249,8 @@ class BuildingU {
 		this.count = getCounts(this.id);
 	    document.getElementById(this.id+"uc").innerHTML = `${this.initPrice} u | Count: ${this.count}`;
 	}
+	refreshIntervals() {
+		this.refreshCount();
+		for(var i=0; i<this.count; i++) this.interval();
+	   }
 }
