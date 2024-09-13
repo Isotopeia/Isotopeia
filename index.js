@@ -24,7 +24,7 @@ function b64Encode(e) {
 function b64Decode(e) {
     return decodeURIComponent(escape(window.atob(e)))
 }
-
+ 
 function exportSave() {
     return b64Encode(JSON.stringify([
         [elncn, elnncn, upcn],
