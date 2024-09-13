@@ -6,7 +6,7 @@ function parseToJs(jsonStr, pushToJtopiaList=true) {
 		j.push(JSON.parse(jsonStr));
 		if(!pushToJtopiaList) localStorage.setItem("jtopia", JSON.stringify(j));
 	} catch {
-		localStorage.setItem("jtopia", "[]");
+		localStorage.setItem("jtopia", stockBuildingsJsonStr);
 		return [];
 	}
 	var jsond = JSON.parse(jsonStr);
