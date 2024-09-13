@@ -248,6 +248,7 @@ class BuildingU {
     }
     refreshCount() {
 		this.count = getCounts(this.id);
+	    	this.price = calculatePrice(this.initPrice, this.count);
 	    document.getElementById(this.id+"uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}`;
 	}
 	refreshIntervals() {
