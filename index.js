@@ -119,6 +119,7 @@ window.onload = function() {
     null == elnncn && (elnncn = 0), update()
     migrationProcessor(localStorage.getItem("version"));
     document.getElementById("titleHTML").innerHTML=`Isotopeia - ${mostRecentVersion}`;
+    uniqueItems.forEach(e => e.refreshIntervals());
 };
 var hooks = [];
 
