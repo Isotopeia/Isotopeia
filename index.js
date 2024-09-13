@@ -13,7 +13,7 @@ var ele = document.getElementById("bcham"),
     beatenGame = !1;
 
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
-    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", ["","", tosave]), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
+    localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])), localStorage.setItem("upg", JSON.stringify(["","", tosave])), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
 }
 
 function b64Encode(e) {
@@ -49,7 +49,7 @@ function importSave(e) {
 
 function load() {
     var ucc = JSON.parse("[" + localStorage.getItem("ucc") + "]"),
-        upg = JSON.parse("[" + localStorage.getItem("upg").slice(0, -1) + "]"),
+        upg = JSON.parse(localStorage.getItem("upg")),
 	bcs = JSON.parse(localStorage.getItem("counts"));
     beatenGame = "true" == localStorage.getItem("beaten_game"), (dark = "true" == localStorage.getItem("dark_mode")) ? document.body.classList.add("dark") : document.body.classList.remove("dark"), elncn = ucc[0], elnncn = ucc[1], upcn = ucc[2], ph = ucc[3], gl = ucc[4], wf = ucc[5], wf2 = ucc[6], cph = upg[0];
     buildingCounts = bcs != null ? bcs : {};
