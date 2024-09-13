@@ -216,7 +216,7 @@ class BuildingU {
         for(var i=0; i<n; i++) {
             if(upcn >= this.price) {
                 upcn -= this.price;
-                this.price = Math.floor(this.price * 1.25);
+                this.price = calculatePrice(this.initPrice,this.count);
                 document.getElementById(this.id+"uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}`;
                 document.getElementById(this.id).setAttribute("onclick", `new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
                 this.interval();
