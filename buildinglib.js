@@ -69,7 +69,7 @@ class BuildingEN {
 	if(buildingCounts[this.id]==undefined) buildingCounts[this.id]=0;
     }
     buy(n = 1) {
-	this.refreshCounts();
+	this.refreshCount();
         var gg=0;
         for(var i=0; i<n; i++) {
             if(elnncn >= this.price) {
@@ -142,7 +142,7 @@ class BuildingE {
 	if(buildingCounts[this.id]==undefined) buildingCounts[this.id]=0;
     }
     buy(n = 1) {
-	this.refreshCounts();
+	this.refreshCount();
         var gg=0;
         for(var i=0; i<n; i++) {
             if(elncn >= this.price) {
@@ -215,7 +215,7 @@ class BuildingU {
 		if(buildingCounts[this.id]==undefined) buildingCounts[this.id]=0;
     }
     buy(n = 1) {
-	this.refreshCounts();
+	this.refreshCount();
         var gg=0;
         for(var i=0; i<n; i++) {
             if(upcn >= this.price) {
