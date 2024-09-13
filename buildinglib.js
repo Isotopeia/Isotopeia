@@ -79,6 +79,7 @@ class BuildingEN {
                 this.interval();
 		buildingCounts[this.id]++;
     		tosave[this.rspot]++;
+		this.refreshCount();
     		toload.push(`new BuildingEN(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}')`);
 		save();
                 gg++;
@@ -86,7 +87,6 @@ class BuildingEN {
                 console.log("not enough");
                 return this.refreshCount();
             }
-            this.refreshCount();
         }
     }
     interval() {
@@ -151,6 +151,7 @@ class BuildingE {
                 this.interval();
 		buildingCounts[this.id]++;
     		tosave[this.rspot] += 1;
+		this.refreshCount();
     		toload.push(`new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}')`);
                 gg++;
             } else {
@@ -159,7 +160,6 @@ class BuildingE {
 		    
             }
         }
-        this.refreshCount();
     }
     interval() {
         window.setInterval(() => {
@@ -223,6 +223,7 @@ class BuildingU {
                 this.interval();
 		buildingCounts[this.id]++;
     		tosave[this.rspot] += 1;
+		this.refreshCount();
     		toload.push(`new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}')`);
                 gg++;
             } else {
@@ -230,7 +231,6 @@ class BuildingU {
                 return this.refreshCount();
             }
         }
-        this.refreshCount();
     }
     interval() {
         window.setInterval(() => {
