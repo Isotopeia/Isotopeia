@@ -81,7 +81,38 @@
                 "perSecond": 1e7,
                 "id": "nuclearReactor"
             }
-        ]
+        ],
+	"u":[
+		{
+			"price": 10,
+			"name": "Quark generator",
+			"perSecond": 10,
+			"id": "quarkGenerator"
+		},
+		{	"price": 1e3,
+			"name": "Matter converter",
+			"perSecond": 1e3,
+			"id": "matterConverter"
+		},
+		{
+			"price": 1e5,
+			"name": "Quark simulator",
+			"perSecond": 1e5,
+			"id": "quarkSimulator"
+		},
+		{
+			"price": 1e6,
+			"name": "Quark fusor",
+			"perSecond": 1e10,
+			"id": "quarkFusor"
+		},
+		{
+			"price": 2e14,
+			"name": "Quark collision chamber",
+			"perSecond": 1e16,
+			"id": "quarkCollider"
+		}
+	]
     },
     "customBehaviors":""
 }
