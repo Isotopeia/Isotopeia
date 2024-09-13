@@ -13,7 +13,7 @@ var ele = document.getElementById("bcham"),
     beatenGame = !1;
 
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
-    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", [cph, lpc, tosave]), localStorage.setItem("cst", [cphc, lepc]), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
+    localStorage.setItem("ucc", [elncn, elnncn, upcn]), localStorage.setItem("upg", ["","", tosave]), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
 }
 
 function b64Encode(e) {
