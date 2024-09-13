@@ -1,10 +1,10 @@
 var crs = 0;
-function parseToJs(jsonStr) {
+function parseToJs(jsonStr, pushToJtopiaList=true) {
 	var j;
 	try {
 		j = JSON.parse(localStorage.getItem("jtopia"));
 		j.push(JSON.parse(jsonStr));
-		localStorage.setItem("jtopia", JSON.stringify(j));
+		if(!pushToJtopiaList) localStorage.setItem("jtopia", JSON.stringify(j));}
 	} catch {
 		localStorage.setItem("jtopia", "[]");
 		return [];
