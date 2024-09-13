@@ -50,7 +50,6 @@ function importSave(e) {
 function load() {
     var ucc = JSON.parse("[" + localStorage.getItem("ucc") + "]"),
         upg = JSON.parse("[" + localStorage.getItem("upg").slice(0, -1) + "]"),
-        cst = JSON.parse("[" + localStorage.getItem("cst") + "]"),
 	bcs = JSON.parse(localStorage.getItem("counts"));
     beatenGame = "true" == localStorage.getItem("beaten_game"), (dark = "true" == localStorage.getItem("dark_mode")) ? document.body.classList.add("dark") : document.body.classList.remove("dark"), elncn = ucc[0], elnncn = ucc[1], upcn = ucc[2], ph = ucc[3], gl = ucc[4], wf = ucc[5], wf2 = ucc[6], cph = upg[0];
     buildingCounts = bcs != null ? bcs : {};
