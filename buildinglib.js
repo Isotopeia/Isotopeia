@@ -84,7 +84,7 @@ class BuildingEN {
                 gg++;
             } else {
                 console.log("not enough");
-                break;
+                return this.refreshCount();
             }
             this.refreshCount();
         }
@@ -155,7 +155,8 @@ class BuildingE {
                 gg++;
             } else {
                 console.log("not enough");
-                break;
+                return this.refreshCount();
+		    
             }
         }
         this.refreshCount();
@@ -226,7 +227,7 @@ class BuildingU {
                 gg++;
             } else {
                 console.log("not enough");
-                break
+                return this.refreshCount();
             }
         }
         this.refreshCount();
