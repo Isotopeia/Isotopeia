@@ -23,19 +23,19 @@ function parseToJs(jsonStr, pushToJtopiaList=true) {
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});}catch{}
+		});}catch(e){console.log(e)}
 		try{enb.forEach((i) => {
 			var x=new BuildingEN(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});}catch{}
+		});}catch(e){console.log(e)}
 		try{ub.forEach((i) => {
 			var x=new BuildingU(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
 			li.push(x);
 			crs++;
-		});}catch{}
+		});}catch(e){console.log(e)}
 	})
 	addItems();
 	return li;
