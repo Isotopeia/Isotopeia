@@ -1,4 +1,5 @@
 var crs = 0;
+var uniqueItems = [];
 function parseToJs(jsonStr, pushToJtopiaList=true) {
 	var j;
 	try {
@@ -21,18 +22,21 @@ function parseToJs(jsonStr, pushToJtopiaList=true) {
 		try{eb.forEach((i) => {
 			var x=new BuildingE(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
+			uniqueItems.push(x);
 			li.push(x);
 			crs++;
 		});}catch{}
 		try{enb.forEach((i) => {
 			var x=new BuildingEN(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
+			uniqueItems.push(x);
 			li.push(x);
 			crs++;
 		});}catch{}
 		try{ub.forEach((i) => {
 			var x=new BuildingU(i.price, i.name, i.perSecond, i.id, crs);
 			hooks.push(x);
+			uniqueItems.push(x);
 			li.push(x);
 			crs++;
 		});}catch{}
