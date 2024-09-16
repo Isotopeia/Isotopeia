@@ -1,4 +1,4 @@
-var prestigeCalc = (eln,elnn,up) => Math.max(Math.floor(Math.log(Math.pow(10,-5*Math.E)*elnn)+Math.log(Math.pow(10,-2.5*Math.E)*eln)+Math.log(Math.pow(10,-7*Math.E)*up)),0);
+var prestigeCalc = (eln,elnn,up) => Math.max(Math.floor(Math.log(1+Math.pow(10,-5*Math.E)*elnn)+Math.log(1+Math.pow(10,-2.5*Math.E)*eln)+Math.log(1+Math.pow(10,-7*Math.E)*up)),0);
 
 const calculatePriceIter = price => Math.floor(1.25*price);
 const calculatePrice = (initPrice,purchased) => {
