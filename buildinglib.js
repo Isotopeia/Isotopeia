@@ -106,9 +106,10 @@ class BuildingEN {
     }
 	refreshCount() {
 		this.count = getCounts(this.id);
+		this.price = calculatePrice(this.initPrice, this.count);
 		document.getElementById(this.id+"uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} V<sub>e</sub> | Count: ${this.count}`;
 	}
-	refreshIntervals() {
+   refreshIntervals() {
 	this.refreshCount();
 	for(var i=0; i<this.count; i++) this.interval();
    }
@@ -178,8 +179,9 @@ class BuildingE {
 		}
     }
     refreshCount() {
-		this.count = getCounts(this.id);
-		document.getElementById(this.id+"uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}`;
+	    this.count = getCounts(this.id);
+	    this.price = calculatePrice(this.initPrice, this.count);
+	    document.getElementById(this.id+"uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}`;
 	}	
    refreshIntervals() {
 	this.refreshCount();
