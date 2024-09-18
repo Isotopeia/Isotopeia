@@ -7,6 +7,7 @@ function parseToJs(jsonStr, pushToJtopiaList=true) {
 		j.push(JSON.parse(jsonStr));
 		if(!pushToJtopiaList) localStorage.setItem("jtopia", JSON.stringify(j));
 	} catch {
+		LoggerIso.logInfo("jtopia localStorage missing, either old version or save broke or something else, resetting to stock upgrades");
 		localStorage.setItem("jtopia", stockBuildingsJsonStr);
 		return [];
 	}
