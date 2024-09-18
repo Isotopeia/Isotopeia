@@ -1,8 +1,10 @@
-var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, timesdone, dark = !1, cphc, lpc, buildingCounts, verboseLogging;
+var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, timesdone, dark = !1, cphc, lpc, buildingCounts, verboseLogging, LoggerIso;
 const mostRecentVersion = "v1.12.0";
 const stockBuildingsJsonStr = JSON.stringify([{"buildings":{"en":[{"price":100,"name":"Bubble chamber","perSecond":1,"id":"bubbleChamber"},{"price":500,"name":"Particle accelerator","perSecond":5,"id":"particleAccelerator"},{"price":5000,"name":"Upgraded laboratory","perSecond":50,"id":"upgradedLaboratory"},{"price":50000,"name":"Fume hood","perSecond":5000,"id":"fumeHood"},{"price":50000000,"name":"Extraterrestiral research facility","perSecond":100000000000,"id":"extraTerraResearchFacility"},{"price":500000000000000,"name":"Microcellular automata","perSecond":1000000000000000,"id":"microAutomata"},{"price":50000000000000000,"name":"Hawking radiaton simulation chamber","perSecond":1000000000000000000,"id":"hawkingSimChamber"},{"price":500000000000000000000,"name":"Black hole simulation chamber","perSecond":100000000000000000000,"id":"blackHoleSimChamber"}],"e":[{"price":100,"name":"Radioactive beta decay machine","perSecond":1,"id":"radioactiveBetaDecayMachine"},{"price":1000,"name":"Oudin coil","perSecond":10,"id":"oudinCoil"},{"price":10000,"name":"Tesla coil","perSecond":1000,"id":"teslaCoil"},{"price":100000,"name":"Marx generator","perSecond":500000,"id":"marxGenerator"},{"price":200000000,"name":"Nuclear reactor","perSecond":10000000,"id":"nuclearReactor"},{"price":30000000000,"name":"Tokamak fusion reactor","perSecond":5000000000,"id":"tokamakFusionReactor"}],"u":[{"price":10,"name":"Quark generator","perSecond":10,"id":"quarkGenerator"},{"price":1000,"name":"Matter converter","perSecond":1000,"id":"matterConverter"},{"price":100000,"name":"Quark simulator","perSecond":100000,"id":"quarkSimulator"},{"price":1000000,"name":"Quark fusor","perSecond":10000000000,"id":"quarkFusor"},{"price":200000000000000,"name":"Quark collision chamber","perSecond":10000000000000000,"id":"quarkCollider"},{"price":500000000000000000000,"name":"Cyclotron","perSecond":1000000000000000000,"id":"cyclotron"}]},"customBehaviors":""}]);
+
 function init() {
-    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, rady = 400, timesdone = 0, buildingCounts = {}, cphc = 500, lpc = 0, verboseLogging = false;
+    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, rady = 400, timesdone = 0, buildingCounts = {}, cphc = 500, lpc = 0, verboseLogging = true;
+    LoggerIso = new Logger(verboseLogging ? Levels.VERBOSE : Levels.ERROR, loggingClass="Isotopeia");
 }
 init();
 var ele = document.getElementById("bcham"),
@@ -44,7 +46,7 @@ function importSave(e) {
     try {
         load()
     } catch {
-        console.log("load error")
+        LoggerIso.logError("Load error!");
     }
     update()
 }
@@ -62,10 +64,10 @@ function load() {
             var tlR = eval(toload[i]);
            tlR.buildUI(), tlR.refreshCount();
         } catch (e) {
-            console.log(e.message)
+            LoggerIso.logError(e.message);
         }
     } catch (e) {
-        console.log(e.message), console.log("toload error")
+        LoggerIso.logError(`toload error: ${e.message}`);
     }
     hooks = parseToJs(localStorage.getItem("jtopia")), addItems(), ran = !0, update()
 }
@@ -113,8 +115,8 @@ window.onload = function() {
             }
             let unique = [...new Set(tmp)];
             for (var n = 0; n < tmp.length; n++) eval(toload[tmp.lastIndexOf(unique[n])]).buildUI()
-        } catch {}
-        addItems()
+        } catch {LoggerIso.logVerbose("weird error @ L106-118, this is probably fine")}
+        addItems();
 	load();
     }
     null == elnncn && (elnncn = 0), update()
@@ -131,7 +133,9 @@ function addItems() {
 var actuallySave = true;
 function confirmReset() {
     actuallySave = false;
-    confirm("Are you sure you want to reset the game? This is irreversible.") && (localStorage.setItem("ucc", [0, 0, 0]), localStorage.setItem("upg", [0, 0, []]), localStorage.setItem("cst", [0, 0]), localStorage.setItem("tl", '[[""]]'), localStorage.setItem("jtopia", stockBuildingsJsonStr), localStorage.setItem("prestige", "0"), localStorage.setItem("counts", "{}"), localStorage.setItem("version", "v1.11.0"), location.reload())
+    confirm("Are you sure you want to reset the game? This is irreversible.") && (localStorage.setItem("ucc", [0, 0, 0]), localStorage.setItem("upg", [0, 0, []]), localStorage.setItem("cst", [0, 0]), localStorage.setItem("tl", '[[""]]'), localStorage.setItem("jtopia", stockBuildingsJsonStr), localStorage.setItem("prestige", "0"), localStorage.setItem("counts", "{}"), localStorage.setItem("version", "v1.11.0");
+	LoggerIso.logWarn("Resetting! This is irreversible without a save backup in Base64.");
+	location.reload())
 }
 // autosaving!
 window.onbeforeunload = function(){
@@ -139,9 +143,9 @@ window.onbeforeunload = function(){
 }
 function migrationProcessor(version) {
 	if(version == null || version == undefined) { // v1.10.0-->v1.11.0+ migration
-		console.log("Migrating from v1.10.0...");
+		LoggerIso.logInfo("Migrating from v1.10.0...");
 		countAll();
-		console.log("Done!");
+		LoggerIso.logInfo("Done!");
 	}
 	localStorage.setItem("version", mostRecentVersion);
 }
