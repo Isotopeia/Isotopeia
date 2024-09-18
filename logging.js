@@ -24,10 +24,10 @@ class Logger {
 		return ["ERROR", "WARN", "INFO", "VERBOSE"][level];
 	}
 	loggingTextPrefix(text,level) {
-		return `[${this.includeClass ? this.loggingClass+'/' : ''}${this.includeLevel ? '%c'+this.loggingTextLevel(level)+'@' : ''}${this.includeTime ? new Date().toLocaleTimeString() : ''}] ${text}`;
+		return `%c[${this.includeClass ? this.loggingClass+'/' : ''}${this.includeLevel ? '%c'+this.loggingTextLevel(level)+'%c@' : ''}${this.includeTime ? new Date().toLocaleTimeString() : ''}] ${text}`;
 	}
 	log(text, level) {
-		console.log(this.loggingTextPrefix(text, level), LevelColors[level]);
+		console.log(this.loggingTextPrefix(text, level), `color: ${this.loggingColor}`, `color: ${LevelColors[level]};`, `color: ${this.loggingColor}`);
 	}
 	logVerbose(text) {
 		this.log(text, Levels.VERBOSE);
