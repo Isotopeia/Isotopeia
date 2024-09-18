@@ -27,6 +27,7 @@ class Logger {
 		return `%c[${this.includeClass ? this.loggingClass+'/' : ''}${this.includeLevel ? '%c'+this.loggingTextLevel(level)+'%c@' : ''}${this.includeTime ? new Date().toLocaleTimeString() : ''}] ${text}`;
 	}
 	log(text, level) {
+		if(level > this.minLevel) return;
 		console.log(this.loggingTextPrefix(text, level), `color: ${this.loggingColor}`, `color: ${LevelColors[level]};`, `color: ${this.loggingColor}`);
 	}
 	logVerbose(text) {
