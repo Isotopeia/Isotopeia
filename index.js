@@ -1,8 +1,8 @@
-var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, timesdone, dark = !1, cphc, lpc, buildingCounts;
+var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, timesdone, dark = !1, cphc, lpc, buildingCounts, verboseLogging;
 const mostRecentVersion = "v1.12.0";
 const stockBuildingsJsonStr = JSON.stringify([{"buildings":{"en":[{"price":100,"name":"Bubble chamber","perSecond":1,"id":"bubbleChamber"},{"price":500,"name":"Particle accelerator","perSecond":5,"id":"particleAccelerator"},{"price":5000,"name":"Upgraded laboratory","perSecond":50,"id":"upgradedLaboratory"},{"price":50000,"name":"Fume hood","perSecond":5000,"id":"fumeHood"},{"price":50000000,"name":"Extraterrestiral research facility","perSecond":100000000000,"id":"extraTerraResearchFacility"},{"price":500000000000000,"name":"Microcellular automata","perSecond":1000000000000000,"id":"microAutomata"},{"price":50000000000000000,"name":"Hawking radiaton simulation chamber","perSecond":1000000000000000000,"id":"hawkingSimChamber"},{"price":500000000000000000000,"name":"Black hole simulation chamber","perSecond":100000000000000000000,"id":"blackHoleSimChamber"}],"e":[{"price":100,"name":"Radioactive beta decay machine","perSecond":1,"id":"radioactiveBetaDecayMachine"},{"price":1000,"name":"Oudin coil","perSecond":10,"id":"oudinCoil"},{"price":10000,"name":"Tesla coil","perSecond":1000,"id":"teslaCoil"},{"price":100000,"name":"Marx generator","perSecond":500000,"id":"marxGenerator"},{"price":200000000,"name":"Nuclear reactor","perSecond":10000000,"id":"nuclearReactor"},{"price":30000000000,"name":"Tokamak fusion reactor","perSecond":5000000000,"id":"tokamakFusionReactor"}],"u":[{"price":10,"name":"Quark generator","perSecond":10,"id":"quarkGenerator"},{"price":1000,"name":"Matter converter","perSecond":1000,"id":"matterConverter"},{"price":100000,"name":"Quark simulator","perSecond":100000,"id":"quarkSimulator"},{"price":1000000,"name":"Quark fusor","perSecond":10000000000,"id":"quarkFusor"},{"price":200000000000000,"name":"Quark collision chamber","perSecond":10000000000000000,"id":"quarkCollider"},{"price":500000000000000000000,"name":"Cyclotron","perSecond":1000000000000000000,"id":"cyclotron"}]},"customBehaviors":""}]);
 function init() {
-    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, rady = 400, timesdone = 0, buildingCounts = {}, cphc = 500, lpc = 0;
+    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, rady = 400, timesdone = 0, buildingCounts = {}, cphc = 500, lpc = 0, verboseLogging = false;
 }
 init();
 var ele = document.getElementById("bcham"),
@@ -13,7 +13,7 @@ var ele = document.getElementById("bcham"),
     beatenGame = !1;
 
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
-    localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])), localStorage.setItem("upg", JSON.stringify(["","", tosave])), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts));
+    localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])), localStorage.setItem("upg", JSON.stringify(["","", tosave])), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts)), localStorage.setItem("verboseLogging", verboseLogging);
 }
 
 function b64Encode(e) {
@@ -29,7 +29,8 @@ function exportSave() {
         [elncn, elnncn, upcn],
         [cph, lpc, tosave], [],
         localStorage.getItem("prestige"),
-	localStorage.getItem("counts")
+		localStorage.getItem("counts"),
+		localStorage.getItem("verboseLogging")
     ]))
 }
 
@@ -39,6 +40,7 @@ function importSave(e) {
     localStorage.setItem("prestige", $[3].toLocaleString('fullwide', {useGrouping:false}));
     localStorage.setItem("counts", $[4]);
     prestigeLevel = parseInt(localStorage.getItem("prestige"));
+    verboseLogging = $[5];
     try {
         load()
     } catch {
@@ -50,7 +52,8 @@ function importSave(e) {
 function load() {
     var ucc = JSON.parse(localStorage.getItem("ucc")),
         upg = JSON.parse(localStorage.getItem("upg")),
-	bcs = JSON.parse(localStorage.getItem("counts"));
+		bcs = JSON.parse(localStorage.getItem("counts")),
+		verboseLogging = JSON.parse(localStorage.getItem("verboseLogging"));
     beatenGame = "true" == localStorage.getItem("beaten_game"), (dark = "true" == localStorage.getItem("dark_mode")) ? document.body.classList.add("dark") : document.body.classList.remove("dark"), elncn = ucc[0], elnncn = ucc[1], upcn = ucc[2], ph = ucc[3], gl = ucc[4], wf = ucc[5], wf2 = ucc[6], cph = upg[0];
     buildingCounts = bcs != null ? bcs : {};
     try {
