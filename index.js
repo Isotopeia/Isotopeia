@@ -132,10 +132,18 @@ function addItems() {
 }
 var actuallySave = true;
 function confirmReset() {
-    actuallySave = false;
-    confirm("Are you sure you want to reset the game? This is irreversible.") && (localStorage.setItem("ucc", [0, 0, 0]), localStorage.setItem("upg", [0, 0, []]), localStorage.setItem("cst", [0, 0]), localStorage.setItem("tl", '[[""]]'), localStorage.setItem("jtopia", stockBuildingsJsonStr), localStorage.setItem("prestige", "0"), localStorage.setItem("counts", "{}"), localStorage.setItem("version", "v1.11.0");
+	if(!confirm("Are you sure you want to reset the game? This is irreversible.")) return;
+    	actuallySave = false;
+	localStorage.setItem("ucc", [0, 0, 0]);
+	localStorage.setItem("upg", [0, 0, []]); 
+	localStorage.setItem("cst", [0, 0]);
+	localStorage.setItem("tl", '[[""]]');
+	localStorage.setItem("jtopia", stockBuildingsJsonStr); 
+	localStorage.setItem("prestige", "0"); 
+	localStorage.setItem("counts", "{}");
+	localStorage.setItem("version", "v1.12.0");
 	LoggerIso.logWarn("Resetting! This is irreversible without a save backup in Base64.");
-	location.reload())
+	location.reload();
 }
 // autosaving!
 window.onbeforeunload = function(){
