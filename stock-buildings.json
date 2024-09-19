@@ -84,8 +84,20 @@
 			{
 				"price": 3e10,
 				"name": "Tokamak fusion reactor",
-				"perSecond": 5e9,
+				"perSecond": 5e10,
 				"id": "tokamakFusionReactor"
+			}
+		{
+				"price": 5e12,
+				"name": "Gravity extractor",
+				"perSecond": 5e13,
+				"id": "gravityExtractor"
+			},
+		{
+				"price": 8e14,
+				"name": "Artificial universe",
+				"perSecond": 5e16,
+				"id": "artificialUniverse"
 			}
         ],
 		"u":[
