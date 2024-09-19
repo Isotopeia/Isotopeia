@@ -86,7 +86,7 @@
 				"name": "Tokamak fusion reactor",
 				"perSecond": 5e10,
 				"id": "tokamakFusionReactor"
-			}
+			},
 		{
 				"price": 5e12,
 				"name": "Gravity extractor",
