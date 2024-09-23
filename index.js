@@ -162,3 +162,15 @@ function migrationProcessor(version) {
 	}
 	localStorage.setItem("version", mostRecentVersion);
 }
+
+const getPriciestBuilding = (jsonData, type="en") => jsonData.buildings[type].sort((a,b) => b.price-a.price)[0]; // use with combineModBuildings
+
+function combineModBuildings(modsArray) {
+    const buildings = modsArray.map(e => e.buildings);
+    const newObj = {"buildings":{"en":[],"e":[],"u":[]}, "customBehaviors":""};
+    Object.keys(buildings[0]).forEach(buildingType => {
+        const buildingsOfType = modsArray.reduce((a,b) => [...a.buildings[buildingType],...b.buildings[buildingType]]);
+        newObj.buildings[buildingType] = newObj.buildings[buildingType].concat(buildingsOfType)
+    });
+    return newObj;
+}
