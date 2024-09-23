@@ -133,7 +133,10 @@ function addItems() {
 var actuallySave = true;
 function confirmReset() {
 	if(!confirm("Are you sure you want to reset the game? This is irreversible.")) return;
-    	actuallySave = false;
+    	resetNoconfirm();
+}
+function resetNoconfirm() {
+	actuallySave = false;
 	localStorage.setItem("ucc", [0, 0, 0]);
 	localStorage.setItem("upg", [0, 0, []]); 
 	localStorage.setItem("cst", [0, 0]);
@@ -150,10 +153,12 @@ window.onbeforeunload = function(){
    if(actuallySave) save();
 }
 function migrationProcessor(version) {
-	if(version == null || version == undefined) { // v1.10.0-->v1.11.0+ migration
-		LoggerIso.logInfo("Migrating from v1.10.0...");
+	if(version == null || version == undefined) { // oldest/pre-v1.10.0-->v1.11.0+ migration, these versions are really old, the commented solution works but can cause issues with NaN Ve counts
+		LoggerIso.logWarn("Migrating from pre-v1.10.0 (resetting!)");
+		resetNoconfirm();
+		/*LoggerIso.logInfo("Migrating from v1.10.0...");
 		countAll();
-		LoggerIso.logInfo("Done!");
+		LoggerIso.logInfo("Done!");*/
 	}
 	localStorage.setItem("version", mostRecentVersion);
 }
