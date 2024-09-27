@@ -159,6 +159,12 @@ function migrationProcessor(version) {
 		/*LoggerIso.logInfo("Migrating from v1.10.0...");
 		countAll();
 		LoggerIso.logInfo("Done!");*/
+		return;
+	}
+	if(buildingUpdateNeeded()) {
+		localStorage.setItem("jtopia", stockBuildingsJsonStr);
+		localStorage.setItem("version", mostRecentVersion);
+		return location.reload();
 	}
 	localStorage.setItem("version", mostRecentVersion);
 }
@@ -173,4 +179,14 @@ function combineModBuildings(modsArray) {
         newObj.buildings[buildingType] = newObj.buildings[buildingType].concat(buildingsOfType)
     });
     return newObj;
+}
+function buildingUpdateNeeded() {
+	const updatedBuildings = JSON.parse(stockBuildingsJsonStr);
+	const buildings = JSON.parse(localStorage.getItem("jtopia"));
+	const updatedPriciest = {"en": getPriciestBuilding(updatedBuildings, "en"), "e": getPriciestBuilding(updatedBuildings, "e"), "u": getPriciestBuilding(updatedBuildings, "u")); 
+	const priciest = {"en": getPriciestBuilding(buildings, "en"), "e": getPriciestBuilding(buildings, "e"), "u": getPriciestBuilding(buildings, "u")); 
+	if(updatedPriciest.en.id != priciest.en.id
+	   || updatedPriciest.e.id != priciest.e.id
+	   || updatedPriciest.u.id != priciest.u.id) return true; // TODO: add logic for mods which have pricier buildings, which breaks current method
+	return false;
 }
