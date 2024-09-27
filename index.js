@@ -181,8 +181,8 @@ function combineModBuildings(modsArray) {
     return newObj;
 }
 function buildingUpdateNeeded() {
-	const updatedBuildings = JSON.parse(stockBuildingsJsonStr);
-	const buildings = JSON.parse(localStorage.getItem("jtopia"));
+	const updatedBuildings = JSON.parse(stockBuildingsJsonStr)[0];
+	const buildings = JSON.parse(localStorage.getItem("jtopia"))[0];
 	const updatedPriciest = {"en": getPriciestBuilding(updatedBuildings, "en"), "e": getPriciestBuilding(updatedBuildings, "e"), "u": getPriciestBuilding(updatedBuildings, "u")}; 
 	const priciest = {"en": getPriciestBuilding(buildings, "en"), "e": getPriciestBuilding(buildings, "e"), "u": getPriciestBuilding(buildings, "u")}; 
 	if(updatedPriciest.en.id != priciest.en.id
