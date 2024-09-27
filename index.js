@@ -183,8 +183,8 @@ function combineModBuildings(modsArray) {
 function buildingUpdateNeeded() {
 	const updatedBuildings = JSON.parse(stockBuildingsJsonStr);
 	const buildings = JSON.parse(localStorage.getItem("jtopia"));
-	const updatedPriciest = {"en": getPriciestBuilding(updatedBuildings, "en"), "e": getPriciestBuilding(updatedBuildings, "e"), "u": getPriciestBuilding(updatedBuildings, "u")); 
-	const priciest = {"en": getPriciestBuilding(buildings, "en"), "e": getPriciestBuilding(buildings, "e"), "u": getPriciestBuilding(buildings, "u")); 
+	const updatedPriciest = {"en": getPriciestBuilding(updatedBuildings, "en"), "e": getPriciestBuilding(updatedBuildings, "e"), "u": getPriciestBuilding(updatedBuildings, "u")}; 
+	const priciest = {"en": getPriciestBuilding(buildings, "en"), "e": getPriciestBuilding(buildings, "e"), "u": getPriciestBuilding(buildings, "u")}; 
 	if(updatedPriciest.en.id != priciest.en.id
 	   || updatedPriciest.e.id != priciest.e.id
 	   || updatedPriciest.u.id != priciest.u.id) return true; // TODO: add logic for mods which have pricier buildings, which breaks current method
