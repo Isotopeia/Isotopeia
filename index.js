@@ -101,7 +101,7 @@ window.onload = function() {
     beatenGame = "true" == localStorage.getItem("beaten_game");
     var to, x = 0;
     if (!ran) {
-        var ucc = JSON.parse("[" + localStorage.getItem("ucc") + "]");
+        var ucc = JSON.parse(localStorage.getItem("ucc"));
         elncn = ucc[0];
         try {
             var tmp = [],
@@ -137,9 +137,9 @@ function confirmReset() {
 }
 function resetNoconfirm() {
 	actuallySave = false;
-	localStorage.setItem("ucc", [0, 0, 0]);
-	localStorage.setItem("upg", [0, 0, []]); 
-	localStorage.setItem("cst", [0, 0]);
+	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
+	localStorage.setItem("upg", JSON.stringify([0, 0, []])); 
+	localStorage.setItem("cst", JSON.stringify([0, 0]));
 	localStorage.setItem("tl", '[[""]]');
 	localStorage.setItem("jtopia", stockBuildingsJsonStr); 
 	localStorage.setItem("prestige", "0"); 
