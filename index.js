@@ -181,12 +181,12 @@ function combineModBuildings(modsArray) {
     return newObj;
 }
 function buildingUpdateNeeded() {
+	if(localStorage.getItem("jtopia") === null) return true;
 	const updatedBuildings = JSON.parse(stockBuildingsJsonStr)[0];
 	const buildings = JSON.parse(localStorage.getItem("jtopia"))[0];
 	const updatedPriciest = {"en": getPriciestBuilding(updatedBuildings, "en"), "e": getPriciestBuilding(updatedBuildings, "e"), "u": getPriciestBuilding(updatedBuildings, "u")}; 
 	const priciest = {"en": getPriciestBuilding(buildings, "en"), "e": getPriciestBuilding(buildings, "e"), "u": getPriciestBuilding(buildings, "u")}; 
-	if(updatedPriciest.en.id != priciest.en.id
+	return updatedPriciest.en.id != priciest.en.id
 	   || updatedPriciest.e.id != priciest.e.id
-	   || updatedPriciest.u.id != priciest.u.id) return true; // TODO: add logic for mods which have pricier buildings, which breaks current method
-	return false;
+	   || updatedPriciest.u.id != priciest.u.id; // TODO: add logic for mods which have pricier buildings, which breaks current method
 }
