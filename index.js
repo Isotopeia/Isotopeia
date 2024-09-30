@@ -106,7 +106,7 @@ window.onload = function() {
         try {
             var tmp = [],
                 ucc = JSON.parse("[" + localStorage.getItem("ucc") + "]");
-            elnncn = ucc[1], toload = JSON.parse(localStorage.getItem("tl"))[0];
+            elnncn = ucc[1] === undefined ? 0 : ucc[1], toload = JSON.parse(localStorage.getItem("tl"))[0];
             for (var i = 0; i < toload.length; i++) {
                 "," == toload[0] && (toload = toload);
                 try {
