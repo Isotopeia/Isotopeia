@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Isotopeia devlog</title>
+    </head>
+   <body>
+        <div class="container">
+            <div class="title-container">
+                <div class="title-text">
+                    <h2>
+                        Ugh, backwards-compatibility
+                    </h2>
+                </div>
+                <div class="author-entry subtext">
+                    by matthy.dev
+                </div>
+                <div class="date-entry subtext">
+                    2024/10/04
+                </div>
+            </div>
+            <div class="content">
+                <u>Backwards compatibility is kind of a pain.</u> You have to make sure that every dumb bit of bad code you made before can be migrated to the next, slightly-better-but-still-bad code. But it's a necessary evil for gamedev, unless you want people complaining that they lose their save every update. I know not a whole lot of people play <a href="https://isotopeia.matthy.dev">my game Isotopeia</a>, but I have <abbr title="lines 155-192 in index.js as of v1.12.1">a decent chunk of lines</abbr> dedicated to just making sure old saves work. Eventually I gave up with the oldest versions (which utilized a terribly inefficient function named <code>countOf</code>) and just decided to auto-reset the save if it's that old and attempting to be migrated to new versions. It's not like anyone played back then either way.
+            </div>
+        </div>
+        <style>
+.devlog-entry {
+    border: 1px solid black;
+}
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title-container title-container title-container"
+    "content content content"
+    "content content content";
+  border: 1px solid #cccccc;
+}
+
+.title-container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title-text title-text title-text"
+    "title-text title-text title-text"
+    "date-entry author-entry author-entry";
+  grid-area: title-container;
+}
+
+.title-text { 
+    grid-area: title-text; 
+    
+}
+
+.author-entry { 
+    grid-area: author-entry; 
+    font-style: italic;
+}
+
+.date-entry { grid-area: date-entry; }
+
+.content { grid-area: content; }
+
+.subtext { color: #8a8a8a;
+        </style>
+   </body>
+</html>
