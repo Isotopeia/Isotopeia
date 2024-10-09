@@ -110,11 +110,11 @@ window.onload = () => {
                 try {
                     eval(toload[i + 1]).interval();
 		    tmp.push(eval(toload[i + 1]).name);
-                } catch warnings++;
+                } catch { warnings++; }
             }
             let unique = [...new Set(tmp)];
             for (var n = 0; n < tmp.length; n++) eval(toload[tmp.lastIndexOf(unique[n])]).buildUI();
-        } catch LoggerIso.logVerbose("weird error in onload !ran loop, this is probably fine");
+        } catch { LoggerIso.logVerbose("weird error in onload !ran loop, this is probably fine"); }
         addItems();
 	load();
     }
