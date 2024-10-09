@@ -82,6 +82,7 @@ function load() {
 }
 
 const electronn = e => { elnncn += e; update(); };
+const electron = e => { elncn += e; update(); };
 const upq = e => { upcn += e; update(); };
 
 function update() {
