@@ -1,142 +1,143 @@
 {
-    "buildings":{
-        "en":[
+    "buildings": {
+        "en": [
             {
-                "price":100,
-                "name":"Bubble chamber",
-                "perSecond":1,
-                "id":"bubbleChamber"
+                "price": 100,
+                "name": "Bubble chamber",
+                "perSecond": 1,
+                "id": "bubbleChamber"
             },
-	        {
-	            "price":500,
-		        "name":"Particle accelerator", 
-		        "perSecond": 5,
-		        "id": "particleAccelerator"
-	        },
-	        {   
-	            "price": 5e3,
-	            "name": "Upgraded laboratory",
-	            "perSecond": 50,
-	            "id": "upgradedLaboratory"
-	        },
-	        {
-	            "price": 5e4,
-	            "name": "Fume hood",
-	            "perSecond": 5e3,
-	            "id": "fumeHood"
-	        },
-	        {
-	            "price": 5e7,
-	            "name": "Extraterrestiral research facility",
-	            "perSecond": 1e11,
-	            "id": "extraTerraResearchFacility"
-	        },
-	        {
-	            "price": 5e14,
-	            "name": "Microcellular automata",
-	            "perSecond": 1e15,
-	            "id": "microAutomata"
-	        },
-	        {
-	            "price": 5e16,
-	            "name": "Hawking radiaton simulation chamber",
-	            "perSecond": 1e18,
-	            "id": "hawkingSimChamber"
-	        },
-	        {
-	            "price": 5e20,
-	            "name": "Black hole simulation chamber",
-	            "perSecond": 1e20,
-	            "id": "blackHoleSimChamber"
-	        }
+            {
+                "price": 500,
+                "name": "Particle accelerator",
+                "perSecond": 5,
+                "id": "particleAccelerator"
+            },
+            {
+                "price": 5000,
+                "name": "Upgraded laboratory",
+                "perSecond": 50,
+                "id": "upgradedLaboratory"
+            },
+            {
+                "price": 50000,
+                "name": "Fume hood",
+                "perSecond": 5000,
+                "id": "fumeHood"
+            },
+            {
+                "price": 50000000,
+                "name": "Extraterrestiral research facility",
+                "perSecond": 100000000000,
+                "id": "extraTerraResearchFacility"
+            },
+            {
+                "price": 500000000000000,
+                "name": "Microcellular automata",
+                "perSecond": 1000000000000000,
+                "id": "microAutomata"
+            },
+            {
+                "price": 50000000000000000,
+                "name": "Hawking radiaton simulation chamber",
+                "perSecond": 1000000000000000000,
+                "id": "hawkingSimChamber"
+            },
+            {
+                "price": 500000000000000000000,
+                "name": "Black hole simulation chamber",
+                "perSecond": 100000000000000000000,
+                "id": "blackHoleSimChamber"
+            }
         ],
-        "e":[
+        "e": [
             {
-                "price":100,
-                "name":"Radioactive beta decay machine",
-                "perSecond":1,
-                "id":"radioactiveBetaDecayMachine"
+                "price": 100,
+                "name": "Radioactive beta decay machine",
+                "perSecond": 1,
+                "id": "radioactiveBetaDecayMachine"
             },
             {
-                "price": 1e3,
+                "price": 1000,
                 "name": "Oudin coil",
                 "perSecond": 10,
                 "id": "oudinCoil"
             },
             {
-                "price": 1e4,
+                "price": 10000,
                 "name": "Tesla coil",
-                "perSecond": 1e3,
+                "perSecond": 1000,
                 "id": "teslaCoil"
             },
             {
-                "price": 1e5,
+                "price": 100000,
                 "name": "Marx generator",
-                "perSecond": 5e5,
+                "perSecond": 500000,
                 "id": "marxGenerator"
             },
             {
-                "price": 2e8,
+                "price": 200000000,
                 "name": "Nuclear reactor",
-                "perSecond": 1e7,
+                "perSecond": 10000000,
                 "id": "nuclearReactor"
             },
-			{
-				"price": 3e10,
-				"name": "Tokamak fusion reactor",
-				"perSecond": 5e10,
-				"id": "tokamakFusionReactor"
-			},
-		{
-				"price": 5e12,
-				"name": "Gravity extractor",
-				"perSecond": 5e13,
-				"id": "gravityExtractor"
-			},
-		{
-				"price": 8e14,
-				"name": "Artificial universe",
-				"perSecond": 5e16,
-				"id": "artificialUniverse"
-			}
+            {
+                "price": 30000000000,
+                "name": "Tokamak fusion reactor",
+                "perSecond": 50000000000,
+                "id": "tokamakFusionReactor"
+            },
+            {
+                "price": 5000000000000,
+                "name": "Gravity extractor",
+                "perSecond": 50000000000000,
+                "id": "gravityExtractor"
+            },
+            {
+                "price": 800000000000000,
+                "name": "Artificial universe",
+                "perSecond": 50000000000000000,
+                "id": "artificialUniverse"
+            }
         ],
-		"u":[
-			{
-				"price": 10,
-				"name": "Quark generator",
-				"perSecond": 10,
-				"id": "quarkGenerator"
-			},
-			{	"price": 1e3,
-				"name": "Matter converter",
-				"perSecond": 1e3,
-				"id": "matterConverter"
-			},
-			{
-				"price": 1e5,
-				"name": "Quark simulator",
-				"perSecond": 1e5,
-				"id": "quarkSimulator"
-			},
-			{
-				"price": 1e6,
-				"name": "Quark fusor",
-				"perSecond": 1e10,
-				"id": "quarkFusor"
-			},
-			{
-				"price": 2e14,
-				"name": "Quark collision chamber",
-				"perSecond": 1e16,
-				"id": "quarkCollider"
-			},
-			{
-				"price": 5e20,
-				"name": "Cyclotron",
-				"perSecond": 1e18,
-				"id": "cyclotron"
-			}
-		]
+        "u": [
+            {
+                "price": 10,
+                "name": "Quark generator",
+                "perSecond": 10,
+                "id": "quarkGenerator"
+            },
+            {
+                "price": 1000,
+                "name": "Matter converter",
+                "perSecond": 1000,
+                "id": "matterConverter"
+            },
+            {
+                "price": 100000,
+                "name": "Quark simulator",
+                "perSecond": 100000,
+                "id": "quarkSimulator"
+            },
+            {
+                "price": 1000000,
+                "name": "Quark fusor",
+                "perSecond": 10000000000,
+                "id": "quarkFusor"
+            },
+            {
+                "price": 200000000000000,
+                "name": "Quark collision chamber",
+                "perSecond": 10000000000000000,
+                "id": "quarkCollider"
+            },
+            {
+                "price": 500000000000000000000,
+                "name": "Cyclotron",
+                "perSecond": 1000000000000000000,
+                "id": "cyclotron"
+            }
+        ]
     },
-    "customBehaviors":""
+    "customBehaviors": ""
 }
