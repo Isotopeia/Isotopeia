@@ -14,7 +14,8 @@
 	font-weight: 900;
 }
 .gain-clickable-button {
-    width: 100%;
+    width: 4rem;
+    height: 4rem;
     font-size: 2rem;
     color: black;
 }
