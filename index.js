@@ -1,27 +1,37 @@
-var elncn, elnncn, upcn, bch, cph, lpc, ph, gl, wf, wf2, timesdone, dark = !1, cphc, lpc, buildingCounts, verboseLogging, LoggerIso;
-const mostRecentVersion = "v1.12.1";
+/*
+ * Welcome to the Isotopeia source code!
+ * This is a passion project of mine that I work on from time to time.
+ * It's a real neat project (neat as in fun to work on, not as in good code)
+ * Have fun tinkering!
+ * ~ matthy.dev
+ */
+console.log("%cWelcome to the Isotopeia console!\nIf you wanna cheat, use the mod in the IsotopeiaMods repo.","font-size:18pt;"); // lil hint at how to cheat 
 
-function init() {
-    elncn = 0, elnncn = 0, upcn = 0, bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, rady = 400, timesdone = 0, buildingCounts = {}, cphc = 500, lpc = 0, verboseLogging = true;
-    LoggerIso = new Logger(verboseLogging ? Levels.VERBOSE : Levels.ERROR, loggingClass="Isotopeia");
-}
-init();
-var ele = document.getElementById("bcham"),
-    ctx = ele.getContext("2d"),
-    tosave = [],
-    toload = [""],
-    ran = false,
-    beatenGame = false,
-    hooks = [],
-    runners = [];
+// RANDOM VARIABLES TIME!
+// similar things have been merged into one line
+const mostRecentVersion = "v1.12.1"; // latest version constant, don't change 
+var elncn = 0, elnncn = 0, upcn = 0; // main currency counters
+var verboseLogging = true; // verbose logging? true = VERBOSE or higher, false = WARN or higher
+var bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, cphc = 500, lpc = 0, timesdone = 0; // unused
+var LoggerIso = new Logger(verboseLogging ? Levels.VERBOSE : Levels.ERROR, loggingClass="Isotopeia"); // see logging.js, simple logger for JS I made for fun
+var ele = document.getElementById("bcham"), ctx = ele.getContext("2d"); // unused  
+var tosave = [], toload = [""], hooks = [], runners = [], buildingCounts = {}; // jtopia shenanigans
+var ran = false; // has load() been ran yet?
+var beatenGame = false; // have you beaten the game yet? If so, you won't get the "congrats" message again
+
 
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
-    localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])), localStorage.setItem("upg", JSON.stringify(["","", tosave])), localStorage.setItem("beaten_game", beatenGame ? "true" : "false"), localStorage.setItem("dark_mode", dark ? "true" : "false"), localStorage.setItem("counts", JSON.stringify(buildingCounts)), localStorage.setItem("verboseLogging", verboseLogging);
+    	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); 
+	localStorage.setItem("upg", JSON.stringify(["","", tosave])); // upgrade storage stuff
+	localStorage.setItem("beaten_game", JSON.stringify(beatenGame)); 
+	localStorage.setItem("dark_mode", JSON.stringify(dark));
+	localStorage.setItem("counts", JSON.stringify(buildingCounts));
+	localStorage.setItem("verboseLogging", JSON.stringify(verboseLogging));
 }
 const b64Encode = e => window.btoa(unescape(encodeURIComponent(e)));
 const b64Decode = e => decodeURIComponent(escape(window.atob(e)));
  
-function exportSave() {
+function exportSave() { // export to base64
     return b64Encode(JSON.stringify([
         [elncn, elnncn, upcn],
         [cph, lpc, tosave], [],
@@ -31,7 +41,7 @@ function exportSave() {
     ]))
 }
 
-function importSave(e) {
+function importSave(e) { // import from base64
     var $ = JSON.parse(b64Decode(e));
     localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]); // , localStorage.setItem("tl", $[2]);
     localStorage.setItem("prestige", $[3].toLocaleString('fullwide', {useGrouping:false}));
@@ -41,12 +51,12 @@ function importSave(e) {
     try {
         load();
     } catch {
-        LoggerIso.logError("Load error!");
+        LoggerIso.logError("B64 load error!");
     }
-    update()
+    update();
 }
 
-function load() {
+function load() { // load from localStorage
     var ucc = JSON.parse(localStorage.getItem("ucc")),
         upg = JSON.parse(localStorage.getItem("upg")),
 	bcs = JSON.parse(localStorage.getItem("counts")),
@@ -81,11 +91,11 @@ function load() {
     update();
 }
 
-const electronn = e => { elnncn += e; update(); };
-const electron = e => { elncn += e; update(); };
-const upq = e => { upcn += e; update(); };
+const electronn = e => { elnncn += e; update(); }; // add e electron neutrinos to count
+const electron = e => { elncn += e; update(); }; // add e electrons to count
+const upq = e => { upcn += e; update(); }; // add e upquarks to count
 
-function update() {
+function update() { // update all the matter counters!
     document.getElementById("elnncnt").innerHTML = elnncn, document.getElementById("elncnt").innerHTML = elncn, document.getElementById("upqcnt").innerHTML = upcn;
     for (var e = 0; e < runners.length; e++) runners[e]();
     if(elnncn >= 2) document.getElementById("adde").removeAttribute("disabled");
@@ -95,7 +105,7 @@ function update() {
 	document.body.style.backgroundColor = "black", document.querySelectorAll(".end").forEach(e => e.style.display = "block");
     }, 200);
 }
-window.onload = () => {
+window.onload = () => { // once all the other things are ready
     beatenGame = "true" == localStorage.getItem("beaten_game");
     var to, x = 0;
     var warnings = 0;
@@ -119,23 +129,23 @@ window.onload = () => {
         addItems();
 	load();
     }
-    LoggerIso.logInfo(`${warnings} errors in try/catch, almost certainly fine`);
+    LoggerIso.logInfo(`${warnings} error(s) in try/catch, almost certainly fine`);
     if(elnncn === null) elnncn = 0;
     update();
     migrationProcessor(localStorage.getItem("version"));
     document.getElementById("titleHTML").innerHTML=`Isotopeia - ${mostRecentVersion}`;
     uniqueItems.forEach(e => e.refreshIntervals());
 };
-function addItems() {
+function addItems() { // load the jtopia upgrades
     for (var e = 0; e < hooks.length; e++) hooks[e].buildUI();
     update();
 }
-var actuallySave = true;
+var actuallySave = true; // flag to actually save it
 function confirmReset() {
 	if(!confirm("Are you sure you want to reset the game? This is irreversible.")) return;
     	resetNoconfirm();
 }
-function resetNoconfirm() {
+function resetNoconfirm() { // reset but don't ask for confirmation!
 	actuallySave = false;
 	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
 	localStorage.setItem("upg", JSON.stringify([0, 0, []])); 
@@ -152,7 +162,7 @@ function resetNoconfirm() {
 window.onbeforeunload = function(){
    if(actuallySave) save();
 }
-function migrationProcessor(version) {
+function migrationProcessor(version) { // migrate from older versions
 	if(version == null || version == undefined) { // oldest/pre-v1.10.0-->v1.11.0+ migration, these versions are really old, the commented solution works but can cause issues with NaN Ve counts
 		LoggerIso.logWarn("Migrating from pre-v1.10.0 (resetting!)");
 		resetNoconfirm();
@@ -169,7 +179,7 @@ function migrationProcessor(version) {
 
 const getPriciestBuilding = (jsonData, type="en") => jsonData.buildings[type].sort((a,b) => b.price-a.price)[0]; // use with combineModBuildings
 
-function combineModBuildings(modsArray) {
+function combineModBuildings(modsArray) { // combine buildings attributes in JSON into 1 mod
     const buildings = modsArray.map(e => e.buildings);
     const newObj = {"buildings":{"en":[],"e":[],"u":[]}, "customBehaviors":""};
     Object.keys(buildings[0]).forEach(buildingType => {
@@ -178,7 +188,7 @@ function combineModBuildings(modsArray) {
     });
     return newObj;
 }
-function buildingUpdateNeeded() {
+function buildingUpdateNeeded() { // do we need to migrate buildings to new version?
 	if(localStorage.getItem("jtopia") === null) return true;
 	const updatedBuildings = JSON.parse(stockBuildingsJsonStr)[0];
 	const buildings = JSON.parse(localStorage.getItem("jtopia"))[0];
