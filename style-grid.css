@@ -58,3 +58,6 @@
 
 .stats { grid-area: stats; }
 
+@media (max-resolution: 1dppx) {
+  .container { display: block; }
+  
