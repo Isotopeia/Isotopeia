@@ -6,7 +6,10 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
 	for (let _ = 0; _ < purchased; _++) newPrice = calculatePriceIter(newPrice);
 	return newPrice;
 }
-
+/**
+ * @function
+ * Confirms if you want to prestige, and then does it if you click Yes. This resets most things!
+ */
 function confirmPrestige() {
 	if (confirm("Are you sure you want to prestige? This is irreversible and you will gain " + prestigeCalc(elncn, elnncn, upcn).toString() + " prestige points.")) {
 		actuallySave = false;
