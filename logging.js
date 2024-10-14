@@ -11,7 +11,7 @@ const LevelColors = [
 	"#ffffff"
 ];
 class Logger {
-	constructor(minLevel=WARN, loggingClass="LOGGER", loggingColor="#3f3f3f", include={loggedTime: true, loggedClass:true}) {
+	constructor(minLevel=WARN, loggingClass="LOGGER", loggingColor="##", include={loggedTime: true, loggedClass:true}) {
 		this.minLevel = minLevel;
 		this.loggingClass = loggingClass;
 		this.loggingColor = loggingColor;
@@ -28,7 +28,7 @@ class Logger {
 	}
 	log(text, level) {
 		if(level > this.minLevel) return;
-		console.log(this.loggingTextPrefix(text, level), `color: ${this.loggingColor}`, `color: ${LevelColors[level]};`, `color: ${this.loggingColor}`);
+		console.log(this.loggingTextPrefix(text, level), `${this.loggingColor === "##" ? "" : "color: "}${this.loggingColor}`, `color: ${LevelColors[level]};`, `${this.loggingColor === "##" ? "" : "color: "}${this.loggingColor}`);
 	}
 	logVerbose(text) {
 		this.log(text, Levels.VERBOSE);
