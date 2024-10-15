@@ -190,6 +190,7 @@ function migrationProcessor(version) { // migrate from older versions
 const getPriciestBuilding = (jsonData, type="en") => jsonData.buildings[type].sort((a,b) => b.price-a.price)[0]; // use with combineModBuildings
 
 function combineModBuildings(modsArray) { // combine buildings attributes in JSON into 1 mod
+    if(modsArray.length === 1) return modsArray[0];
     const buildings = modsArray.map(e => e.buildings);
     const newObj = {"buildings":{"en":[],"e":[],"u":[]}, "customBehaviors":""};
     Object.keys(buildings[0]).forEach(buildingType => {
