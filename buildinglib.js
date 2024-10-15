@@ -17,7 +17,6 @@ function confirmPrestige() {
 		localStorage.setItem("upg", [0, 0, []])
 		localStorage.setItem("cst", [0, 0])
 		localStorage.setItem("tl", '[[""]]')
-		localStorage.setItem("jtopia", stockBuildingsJsonStr);
 		localStorage.setItem("counts", "{}")
 		localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn, elnncn, upcn) : parseInt(localStorage.getItem("prestige")) + prestigeCalc(elncn, elnncn, upcn)).toLocaleString('fullwide', {
 			useGrouping: false
