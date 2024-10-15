@@ -211,10 +211,16 @@ function buildingUpdateNeeded() { // do we need to migrate buildings to new vers
 const blankToZero = v => [null,undefined,NaN].includes(v) ? 0 : v;
 const getPS = (obj,typ) => obj.buildings[typ].reduce((obj, item) => Object.assign(obj, {[item.id]: item.perSecond}), {});
 const getGainWithCounts = (prices,counts) => Object.keys(prices).map(pID => blankToZero(prices[pID])*blankToZero(counts[pID])).reduce((a,b) => a+b);
+const jtParsed = combineModBuildings(JSON.parse(localStorage.getItem("jtopia")));
+const psEach = {
+	"e": getPS(jtParsed, "e"),
+	"en": getPS(jtParsed, "en"),
+	"u": getPS(jtParsed, "u")
+};
 function updatePerSecond() {
-	elnps = getGainWithCounts(getPS(JSON.parse(stockBuildingsJsonStr), "e"), buildingCounts);
-	elnnps = getGainWithCounts(getPS(JSON.parse(stockBuildingsJsonStr), "en"), buildingCounts);
-	upps = getGainWithCounts(getPS(JSON.parse(stockBuildingsJsonStr), "u"), buildingCounts);
+	elnps = getGainWithCounts(psEach.e, buildingCounts);
+	elnnps = getGainWithCounts(psEach.en, buildingCounts);
+	upps = getGainWithCounts(psEach.u, buildingCounts);
 	elnpc = 1+Math.floor(elnps / 15);
 	elnnpc = 1+Math.floor(elnnps / 15);
 	uppc = 1+Math.floor(upps / 15);
