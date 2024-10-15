@@ -11,6 +11,7 @@ console.log("%cWelcome to the Isotopeia console!\nIf you wanna cheat, use the mo
 // similar things have been merged into one line
 const mostRecentVersion = "v1.12.1"; // latest version constant, don't change 
 var elncn = 0, elnncn = 0, upcn = 0; // main currency counters
+var elnpc = 1, elnnpc = 1, uppc = 1; // gain per click for each currency
 var verboseLogging = true; // verbose logging? true = VERBOSE or higher, false = WARN or higher
 var bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, cphc = 500, lpc = 0, timesdone = 0; // unused
 var LoggerIso = new Logger(verboseLogging ? Levels.VERBOSE : Levels.ERROR, loggingClass="Isotopeia"); // see logging.js, simple logger for JS I made for fun
@@ -21,7 +22,8 @@ var beatenGame = false; // have you beaten the game yet? If so, you won't get th
 
 
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
-    	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); 
+    	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); // currency counters
+	localStorage.setItem("pc", JSON.stringify([elnpc, elnnpc, uppc]); // per click
 	localStorage.setItem("upg", JSON.stringify(["","", tosave])); // upgrade storage stuff
 	localStorage.setItem("beaten_game", JSON.stringify(beatenGame)); 
 	localStorage.setItem("dark_mode", JSON.stringify(dark));
@@ -37,7 +39,8 @@ function exportSave() { // export to base64
         [cph, lpc, tosave], [],
         localStorage.getItem("prestige"),
 	localStorage.getItem("counts"),
-	localStorage.getItem("verboseLogging")
+	localStorage.getItem("verboseLogging"),
+	localStorage.getItem("pc")
     ]))
 }
 
@@ -48,6 +51,7 @@ function importSave(e) { // import from base64
     localStorage.setItem("counts", $[4]);
     prestigeLevel = parseInt(localStorage.getItem("prestige"));
     verboseLogging = $[5];
+    localStorage.setItem("pc", $[6]);
     try {
         load();
     } catch {
@@ -60,7 +64,8 @@ function load() { // load from localStorage
     var ucc = JSON.parse(localStorage.getItem("ucc")),
         upg = JSON.parse(localStorage.getItem("upg")),
 	bcs = JSON.parse(localStorage.getItem("counts")),
-	verboseLogging = JSON.parse(localStorage.getItem("verboseLogging"));
+	verboseLogging = JSON.parse(localStorage.getItem("verboseLogging")),
+	pc = JSON.parse(localStorage.getItem("pc"));
     beatenGame = JSON.parse(localStorage.getItem("beaten_game"));
     dark = JSON.parse(localStorage.getItem("dark_mode"));
     dark ? document.body.classList.add("dark") : document.body.classList.remove("dark");
@@ -72,6 +77,9 @@ function load() { // load from localStorage
     wf = ucc[5];
     wf2 = ucc[6]
     cph = upg[0];
+    elnpc = pc[0];
+    elnnpc = pc[1];
+    uppc = pc[2];
     buildingCounts = bcs != null ? bcs : {};
     try {
         toload = JSON.parse(localStorage.getItem("tl"))[0];
@@ -198,3 +206,11 @@ function buildingUpdateNeeded() { // do we need to migrate buildings to new vers
 	   || updatedPriciest.e.id != priciest.e.id
 	   || updatedPriciest.u.id != priciest.u.id; // TODO: add logic for mods which have pricier buildings, which breaks current method
 }
+const getAllPrices = obj => [...obj.buildings.en, ...obj.buildings.e, ...obj.buildings.u].reduce((obj, item) => Object.assign(obj, {[item.id]: item.price}), {});
+/*
+function calculateGain(jso = JSON.parse(localStorage.getItem("jtopia"))) {
+	const combinedBuildings = combineModBuildings(jso);
+	Object.keys(buildingCounts).forEach(e => {
+	});
+}
+*/
