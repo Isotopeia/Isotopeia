@@ -113,6 +113,7 @@ function update() { // update all the matter counters!
         document.querySelectorAll(".game").forEach(e => e.style.display = "none");
 	document.body.style.backgroundColor = "black", document.querySelectorAll(".end").forEach(e => e.style.display = "block");
     }, 200);
+    updatePerSecond();
 }
 window.onload = () => { // once all the other things are ready
     beatenGame = "true" == localStorage.getItem("beaten_game");
