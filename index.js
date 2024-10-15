@@ -195,7 +195,7 @@ function combineModBuildings(modsArray) { // combine buildings attributes in JSO
     const newObj = {"buildings":{"en":[],"e":[],"u":[]}, "customBehaviors":""};
     Object.keys(buildings[0]).forEach(buildingType => {
         const buildingsOfType = modsArray.reduce((a,b) => [...a.buildings[buildingType],...b.buildings[buildingType]]);
-        newObj.buildings[buildingType] = newObj.buildings[buildingType].concat(buildingsOfType)
+        newObj.buildings[buildingType] = newObj.buildings[buildingType].concat(buildingsOfType.buildings[buildingType])
     });
     return newObj;
 }
