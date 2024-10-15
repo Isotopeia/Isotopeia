@@ -12,6 +12,7 @@ console.log("%cWelcome to the Isotopeia console!\nIf you wanna cheat, use the mo
 const mostRecentVersion = "v1.12.1"; // latest version constant, don't change 
 var elncn = 0, elnncn = 0, upcn = 0; // main currency counters
 var elnpc = 1, elnnpc = 1, uppc = 1; // gain per click for each currency
+var elnps = 0, elnnps = 0, upps = 0; // per second gain for each currency
 var verboseLogging = true; // verbose logging? true = VERBOSE or higher, false = WARN or higher
 var bch = 0, cph = 0, lpc = 0, ph = 0, gl = 0, wf = 0, wf2 = 0, cphc = 500, lpc = 0, timesdone = 0; // unused
 var LoggerIso = new Logger(verboseLogging ? Levels.VERBOSE : Levels.ERROR, loggingClass="Isotopeia"); // see logging.js, simple logger for JS I made for fun
@@ -206,11 +207,14 @@ function buildingUpdateNeeded() { // do we need to migrate buildings to new vers
 	   || updatedPriciest.e.id != priciest.e.id
 	   || updatedPriciest.u.id != priciest.u.id; // TODO: add logic for mods which have pricier buildings, which breaks current method
 }
-const getAllPrices = obj => [...obj.buildings.en, ...obj.buildings.e, ...obj.buildings.u].reduce((obj, item) => Object.assign(obj, {[item.id]: item.price}), {});
-/*
-function calculateGain(jso = JSON.parse(localStorage.getItem("jtopia"))) {
-	const combinedBuildings = combineModBuildings(jso);
-	Object.keys(buildingCounts).forEach(e => {
-	});
+const blankToZero = v => [null,undefined,NaN].includes(v) ? 0 : v;
+const getPS = (obj,typ) => obj.buildings[typ].reduce((obj, item) => Object.assign(obj, {[item.id]: item.perSecond}), {});
+const getGainWithCounts = (prices,counts) => Object.keys(prices).map(pID => blankToZero(prices[pID])*blankToZero(counts[pID])).reduce((a,b) => a+b);
+function updatePerSecond() {
+	elnps = getGainWithCounts(getPS(JSON.parse(stockBuildingsJsonStr), "e"), buildingCounts);
+	elnnps = getGainWithCounts(getPS(JSON.parse(stockBuildingsJsonStr), "en"), buildingCounts);
+	upps = getGainWithCounts(getPS(JSON.parse(stockBuildingsJsonStr), "u"), buildingCounts);
+	elnpc = 1+Math.floor(elnps / 15);
+	elnnpc = 1+Math.floor(elnnps / 15);
+	uppc = 1+Math.floor(upps / 15);
 }
-*/
