@@ -24,7 +24,7 @@ var beatenGame = false; // have you beaten the game yet? If so, you won't get th
 
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
     	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); // currency counters
-	localStorage.setItem("pc", JSON.stringify([elnpc, elnnpc, uppc]); // per click
+	localStorage.setItem("pc", JSON.stringify([elnpc, elnnpc, uppc])); // per click
 	localStorage.setItem("upg", JSON.stringify(["","", tosave])); // upgrade storage stuff
 	localStorage.setItem("beaten_game", JSON.stringify(beatenGame)); 
 	localStorage.setItem("dark_mode", JSON.stringify(dark));
