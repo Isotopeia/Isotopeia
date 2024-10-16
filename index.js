@@ -219,9 +219,9 @@ const psEach = {
 	"u": getPS(jtParsed, "u")
 };
 function updatePerSecond() {
-	elnps = getGainWithCounts(psEach.e, buildingCounts);
-	elnnps = getGainWithCounts(psEach.en, buildingCounts);
-	upps = getGainWithCounts(psEach.u, buildingCounts);
+	elnps = getGainWithCounts(psEach.e, buildingCounts)*(1+positrons);
+	elnnps = getGainWithCounts(psEach.en, buildingCounts)*(1+positrons);
+	upps = getGainWithCounts(psEach.u, buildingCounts)*(1+positrons);
 	elnpc = 1+Math.floor(elnps / 15);
 	elnnpc = 1+Math.floor(elnnps / 15);
 	uppc = 1+Math.floor(upps / 15);
