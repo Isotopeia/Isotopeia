@@ -152,7 +152,7 @@ function addItems() { // load the jtopia upgrades
 }
 var actuallySave = true; // flag to actually save it
 function confirmReset() {
-	alert(psEach.toString());
+	alert(JSON.stringify(psEach));
 	if(!confirm("Are you sure you want to reset the game? This is irreversible.")) return;
     	resetNoconfirm();
 }
