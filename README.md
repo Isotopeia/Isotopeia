@@ -1,4 +1,4 @@
-<div align="center"><img src="logolong.png" style="height: 5rem;" /><br />
+<div align="center"><img src="img/logolong.png" style="height: 5rem;" /><br />
 <img src="https://github.com/Isotopeia/Isotopeia/actions/workflows/main.yml/badge.svg" />&nbsp;<img src="https://img.shields.io/badge/latest_version-v1.12.1-lime" /></div>
 <hr />
 
