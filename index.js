@@ -121,13 +121,12 @@ window.onload = () => { // once all the other things are ready
     var warnings = 0;
     if (!ran) {
         var ucc = JSON.parse(localStorage.getItem("ucc"));
-        elncn = ucc[0];
-	elnncn = ucc[1];
-	upcn = ucc[2];
+        elncn = blankToZero(ucc[0]);
+	elnncn = blankToZero(ucc[1]);
+	upcn = blankToZero(ucc[2]);
         try {
-            var tmp = [],
-                ucc = JSON.parse(`[${localStorage.getItem("ucc")}]`);
-            elnncn = ucc[1] === undefined ? 0 : ucc[1];
+            var tmp = [];
+            
 	    toload = JSON.parse(localStorage.getItem("tl"))[0];
             for (var i = 0; i < toload.length; i++) {
                 try {
