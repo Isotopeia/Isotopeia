@@ -122,6 +122,8 @@ window.onload = () => { // once all the other things are ready
     if (!ran) {
         var ucc = JSON.parse(localStorage.getItem("ucc"));
         elncn = ucc[0];
+	elnncn = ucc[1];
+	upcn = ucc[2];
         try {
             var tmp = [],
                 ucc = JSON.parse(`[${localStorage.getItem("ucc")}]`);
