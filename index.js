@@ -70,9 +70,9 @@ function load() { // load from localStorage
     beatenGame = JSON.parse(localStorage.getItem("beaten_game"));
     dark = JSON.parse(localStorage.getItem("dark_mode"));
     dark ? document.body.classList.add("dark") : document.body.classList.remove("dark");
-    elncn = ucc[0];
-    elnncn = ucc[1];
-    upcn = ucc[2];
+    elncn = blankToZero(ucc[0]);
+    elnncn = blankToZero(ucc[1]);
+    upcn = blankToZero(ucc[2]);
     ph = ucc[3];
     gl = ucc[4];
     wf = ucc[5];
