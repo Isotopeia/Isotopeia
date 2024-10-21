@@ -1,6 +1,11 @@
 var prestigeCalc = (eln, elnn, up) => Math.max(Math.floor(Math.log(1 + Math.pow(10, -5 * Math.E) * elnn) + Math.log(1 + Math.pow(10, -2.5 * Math.E) * eln) + Math.log(1 + Math.pow(10, -7 * Math.E) * up)), 0);
 
 const calculatePriceIter = price => Math.floor(1.25 * price);
+/**
+ * @function
+ * @param{number} initPrice - The starting the price of the building (as defined in the .json file)
+ * @param{number} purchased - The number of buildings to purchase for the resulting price.
+ */
 const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) purchased times, we can't do 1.25^initPrice since I want it to be floor'd every time.
 	let newPrice = initPrice;
 	for (let _ = 0; _ < purchased; _++) newPrice = calculatePriceIter(newPrice);
@@ -127,12 +132,11 @@ class BuildingEN {
   	 * @param {boolean} [isModded=false] Is this building from a mod? Always true, but defaults to false.
          */
 	buildUI(isModded = false) {
-		if (document.getElementById(this.id) == null || isModded) {
-			document.getElementById("upgr").innerHTML += `<p>
-            <button id="${this.id}" disabled onclick=" new BuildingEN(${calculatePrice(this.initPrice,this.count)}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
-            <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} V<sub>e</sub> | Count: ${this.count}</span></p>
-            </p>`;
-		}
+		if (!(document.getElementById(this.id) == null || isModded)) return;
+		document.getElementById("upgr").innerHTML += `<p>
+    <button id="${this.id}" disabled onclick=" new BuildingEN(${calculatePrice(this.initPrice,this.count)}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
+    <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} V<sub>e</sub> | Count: ${this.count}</span></p>
+    </p>`;
 	}
 	/**
  	 * @method
@@ -155,7 +159,7 @@ class BuildingEN {
 class BuildingE {
 	/**
  	 * @constructor
-         * Electron neutrino building
+         * Electron building
    	 * @param {number} price - The starting price of the building.
          * @param {string} name - The sentence-case name of the building (not id!).
 	 * @param {string} ps - The per second gain of 1 building (like CPS in Cookie Clicker).
@@ -233,12 +237,11 @@ class BuildingE {
   	 * @param {boolean} [isModded=false] Is this building from a mod? Always true, but defaults to false.
          */
 	buildUI(isModded = false) {
-		if (document.getElementById(this.id) == null || isModded) {
-			document.getElementById("upgr").innerHTML += `<p>
-			<button id="${this.id}" disabled onclick="new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
-			<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}</span></p>
-			</p>`;
-		}
+		if (!(document.getElementById(this.id) == null || isModded)) return;
+		document.getElementById("upgr").innerHTML += `<p>
+		<button id="${this.id}" disabled onclick="new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
+		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}</span></p>
+		</p>`;
 	}
 	/**
  	 * @method
@@ -261,7 +264,7 @@ class BuildingE {
 class BuildingU {
 	/**
  	 * @constructor
-         * Electron neutrino building
+         * Up quark building
    	 * @param {number} price - The starting price of the building.
          * @param {string} name - The sentence-case name of the building (not id!).
 	 * @param {string} ps - The per second gain of 1 building (like CPS in Cookie Clicker).
@@ -337,12 +340,11 @@ class BuildingU {
   	 * @param {boolean} [isModded=false] Is this building from a mod? Always true, but defaults to false.
          */
 	buildUI(isModded = false) {
-		if (document.getElementById(this.id) == null || isModded) {
-			document.getElementById("upgr").innerHTML += `<p>
-			<button id="${this.id}" disabled onclick=" new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
-			<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}</span></p>
-			</p>`;
-		}
+		if (!(document.getElementById(this.id) == null || isModded)) return;
+		document.getElementById("upgr").innerHTML += `<p>
+		<button id="${this.id}" disabled onclick=" new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
+		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}</span></p>
+		</p>`;
 	}
 	/**
  	 * @method
