@@ -1,0 +1,34 @@
+<h1>Mod Combiner</h1>
+<p>Just combines 2 mods together into 1.</p>
+<script>
+function addBlanks(modObj) {
+    const missingBuildings = modObj.buildings === undefined;
+    const missingEn = missingBuildings || modObj.buildings.en === undefined;
+    const missingE = missingBuildings || modObj.buildings.e === undefined;
+    const missingU = missingBuildings || modObj.buildings.u === undefined;
+    if(missingBuildings) {
+        Object.assign(modObj, {"buildings":{"en":[],"e":[],"u":[]}});
+        return modObj;
+    }
+    if(missingEn) Object.assign(modObj.buildings, {"en":[]});
+    if(missingE) Object.assign(modObj.buildings, {"e":[]});
+    if(missingU) Object.assign(modObj.buildings, {"u":[]});
+    return modObj;
+}
+function combineModBuildings(modsArrayOriginal) { // combine buildings attributes in JSON into 1 mod
+    let modsArray = modsArrayOriginal.map(addBlanks);
+    if(modsArray.length === 1) return modsArray[0];
+    const buildings = modsArray.map(e => e.buildings);
+    const newObj = {"buildings":{"en":[],"e":[],"u":[]}, "customBehaviors":""};
+    ["e", "en", "u"].forEach(buildingType => {
+        const buildingsOfType = {"buildings":{[buildingType]:modsArray.reduce((a,b) => [...a.buildings[buildingType],...b.buildings[buildingType]])}};
+        newObj.buildings[buildingType] = newObj.buildings[buildingType].concat(buildingsOfType.buildings[buildingType]);
+    });
+    newObj.customBehaviors = modsArray.map(e => `(()=>{${e.customBehaviors}})();`).join("");
+    return newObj;
+}
+</script>
+<input type="text" id="inputA" placeholder="Mod 1" />
+<br />
+<input type="text" id="inputB" placeholder="Mod 2" />
+<button onclick="inputA.value = JSON.stringify(combineModBuildings([JSON.parse(inputA.value), JSON.parse(inputB.value)])); inputB.value = '';">Combine</button>
