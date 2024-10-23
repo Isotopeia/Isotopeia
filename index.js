@@ -109,7 +109,7 @@ function update() { // update all the matter counters!
     for (var e = 0; e < runners.length; e++) runners[e]();
     if(elnncn >= 2) document.getElementById("adde").removeAttribute("disabled");
     if(elncn >= 5) document.getElementById("addup").removeAttribute("disabled")
-    if(elnncn >= 1e22 && !beatenGame) setTimeout(() => {
+    if(prestigeLevel >= 500 && !beatenGame) setTimeout(() => {
         document.querySelectorAll(".game").forEach(e => e.style.display = "none");
 	document.body.style.backgroundColor = "black", document.querySelectorAll(".end").forEach(e => e.style.display = "block");
     }, 200);
