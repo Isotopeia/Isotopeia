@@ -33,6 +33,14 @@ function save() { // localStorage `tl` is deprecated, don't use, replaced with b
 }
 const b64Encode = e => window.btoa(unescape(encodeURIComponent(e)));
 const b64Decode = e => decodeURIComponent(escape(window.atob(e)));
+const tryOrLog = (toRun, message, level=Levels.ERROR) => {
+	if(typeof message === "string") message = (err) => message;
+	try {
+		toRun();
+	} catch(e) {
+		message(e);
+	}
+};
  
 function exportSave() { // export to base64
     return b64Encode(JSON.stringify([
@@ -46,18 +54,17 @@ function exportSave() { // export to base64
 }
 
 function importSave(e) { // import from base64
-    var $ = JSON.parse(b64Decode(e));
-    localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]); // , localStorage.setItem("tl", $[2]);
+    var $ = JSON.parse(b64Decode(e)); // base64 --> JSON as string --> JSON
+    // save all to localStorage first...
+    localStorage.setItem("ucc", $[0]), localStorage.setItem("upg", $[1]);
     localStorage.setItem("prestige", $[3].toLocaleString('fullwide', {useGrouping:false}));
     localStorage.setItem("counts", $[4]);
-    prestigeLevel = parseInt(localStorage.getItem("prestige"));
-    verboseLogging = $[5];
+    localStorage.setItem("verboseLogging", $[5])
     localStorage.setItem("pc", $[6]);
-    try {
-        load();
-    } catch {
-        LoggerIso.logError("B64 load error!");
-    }
+    // *then* update the current instance to localStorage
+    prestigeLevel = parseInt(localStorage.getItem("prestige"));
+    verboseLogging = JSON.parse(localStorage.getItem("verboseLogging"));
+    tryOrLog(load, "B64 load error!");
     update();
 }
 
@@ -82,18 +89,14 @@ function load() { // load from localStorage
     elnnpc = pc[1];
     uppc = pc[2];
     buildingCounts = bcs != null ? bcs : {};
-    try {
+    tryOrLog(() => {
         toload = JSON.parse(localStorage.getItem("tl"))[0];
-        for (var i = 1; i < toload.length; i++) try {
+        for (var i = 1; i < toload.length; i++) tryOrLog(() => {
             var tlR = eval(toload[i]);
             tlR.buildUI();
 	    tlR.refreshCount();
-        } catch (e) {
-            LoggerIso.logError(e.message);
-        }
-    } catch (e) {
-        LoggerIso.logError(`toload error: ${e.message}`);
-    }
+        }, e.message);
+    }, e => `toload error: ${e.message}`);
     hooks = parseToJs(localStorage.getItem("jtopia"));
     addItems();
     ran = true;
@@ -124,7 +127,7 @@ window.onload = () => { // once all the other things are ready
         elncn = blankToZero(ucc[0]);
 	elnncn = blankToZero(ucc[1]);
 	upcn = blankToZero(ucc[2]);
-        try {
+        tryOrLog(() => {
             var tmp = [];
             
 	    toload = JSON.parse(localStorage.getItem("tl"))[0];
@@ -136,7 +139,7 @@ window.onload = () => { // once all the other things are ready
             }
             let unique = [...new Set(tmp)];
             for (var n = 0; n < tmp.length; n++) eval(toload[tmp.lastIndexOf(unique[n])]).buildUI();
-        } catch { LoggerIso.logVerbose("weird error in onload !ran loop, this is probably fine"); }
+        }, "weird error in onload !ran loop, this is probably fine", Levels.VERBOSE);
         addItems();
 	load();
     }
@@ -170,7 +173,7 @@ function resetNoconfirm() { // reset but don't ask for confirmation!
 	location.reload();
 }
 // autosaving!
-window.onbeforeunload = function(){
+window.onbeforeunload = () => {
    if(actuallySave) save();
 }
 function migrationProcessor(version) { // migrate from older versions
