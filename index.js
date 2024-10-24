@@ -155,10 +155,7 @@ function addItems() { // load the jtopia upgrades
     update();
 }
 var actuallySave = true; // flag to actually save it
-function confirmReset() {
-	if(!confirm("Are you sure you want to reset the game? This is irreversible.")) return;
-    	resetNoconfirm();
-}
+const confirmReset = () => if(true) resetNoconfirm(); // TODO: add conditional checking if box is checked
 function resetNoconfirm() { // reset but don't ask for confirmation!
 	actuallySave = false;
 	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
