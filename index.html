@@ -57,7 +57,7 @@
 					<button onclick="parseToJs(document.getElementById('modjson').value)" class="blackcol oxygen">Add mods</button>
 					<br />
 					<input type="checkbox" id="resetcheckbox" autocomplete="off" onclick="if(this.checked) { document.getElementById('resetbutton').removeAttribute('disabled'); } else { document.getElementById('resetbutton').setAttribute('disabled',''); }"/>
-					<button id="resetbutton" disabled onclick="confirmReset();" class="redcol oxygen">Reset</button><br />
+					<button id="resetbutton" disabled onclick="resetNoconfirm();" class="redcol oxygen">Reset</button><br />
 					<button class="blackcol oxygen" onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
 					<button class="blackcol oxygen"  onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
 					<br />
