@@ -16,19 +16,16 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
  * Confirms if you want to prestige, and then does it if you click Yes. This resets most things!
  */
 function confirmPrestige() {
-	if (confirm("Are you sure you want to prestige? This is irreversible and you will gain " + prestigeCalc(elncn, elnncn, upcn).toString() + " prestige points.")) {
-		actuallySave = false;
-		localStorage.setItem("ucc", [0, 0, 0])
-		localStorage.setItem("upg", [0, 0, []])
-		localStorage.setItem("cst", [0, 0])
-		localStorage.setItem("tl", '[[""]]')
-		localStorage.setItem("counts", "{}")
-		localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn, elnncn, upcn) : parseInt(localStorage.getItem("prestige")) + prestigeCalc(elncn, elnncn, upcn)).toLocaleString('fullwide', {
-			useGrouping: false
-		}));
-		location.reload();
-	}
-
+	actuallySave = false;
+	localStorage.setItem("ucc", [0, 0, 0])
+	localStorage.setItem("upg", [0, 0, []])
+	localStorage.setItem("cst", [0, 0])
+	localStorage.setItem("tl", '[[""]]')
+	localStorage.setItem("counts", "{}")
+	localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn, elnncn, upcn) : parseInt(localStorage.getItem("prestige")) + prestigeCalc(elncn, elnncn, upcn)).toLocaleString('fullwide', {
+		useGrouping: false
+	}));
+	location.reload();
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
 
