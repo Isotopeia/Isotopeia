@@ -155,7 +155,7 @@ function addItems() { // load the jtopia upgrades
     update();
 }
 var actuallySave = true; // flag to actually save it
-const confirmReset = () => if(document.getElementById("resetcheckbox").checked) resetNoconfirm();
+const confirmReset = () => { if(document.getElementById("resetcheckbox").checked) resetNoconfirm(); }
 function resetNoconfirm() { // reset but don't ask for confirmation!
 	actuallySave = false;
 	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
