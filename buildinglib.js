@@ -29,7 +29,11 @@ function confirmPrestige() {
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
 
-document.getElementById("statsid").innerHTML += "<h2>Prestige</h2> Positrons: <span id='prestigeval'>0</span><br /><button class='oxygen blackcol' id='prestigeButton' onclick='confirmPrestige();'>Prestige for poistrons</button>";
+document.getElementById("statsid").innerHTML += `
+	<h2>Prestige</h2>
+ 	Positrons: 
+  	<span id='prestigeval'>0</span> <br />
+   	<input type='checkbox' onclick='if(this.checked) { prestigeButton.removeAttribute("disabled"); } else { prestigeButton.setAttribute("disabled", ""); } <button disabled class='oxygen blackcol' id='prestigeButton' onclick='confirmPrestige();'>Prestige for poistrons</button>`;
 
 document.getElementById("prestigeval").innerHTML = prestigeLevel;
 
