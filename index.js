@@ -9,7 +9,7 @@ console.log("%cWelcome to the Isotopeia console!\nIf you wanna cheat, use the mo
 
 // RANDOM VARIABLES TIME!
 // similar things have been merged into one line
-const mostRecentVersion = "v1.12.1"; // latest version constant, don't change 
+const mostRecentVersion = "v1.12.2"; // latest version constant, don't change 
 var elncn = 0, elnncn = 0, upcn = 0; // main currency counters
 var elnpc = 1, elnnpc = 1, uppc = 1; // gain per click for each currency
 var elnps = 0, elnnps = 0, upps = 0; // per second gain for each currency
