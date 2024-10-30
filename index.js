@@ -108,7 +108,7 @@ const electron = e => { elncn += e; update(); }; // add e electrons to count
 const upq = e => { upcn += e; update(); }; // add e upquarks to count
 
 function update() { // update all the matter counters!
-    document.getElementById("elnncnt").innerHTML = elnncn, document.getElementById("elncnt").innerHTML = elncn, document.getElementById("upqcnt").innerHTML = upcn;
+    document.getElementById("elnncnt").innerHTML = Math.floor(elnncn), document.getElementById("elncnt").innerHTML = Math.floor(elncn), document.getElementById("upqcnt").innerHTML = Math.floor(upcn);
     for (var e = 0; e < runners.length; e++) runners[e]();
     if(elnncn >= 2) document.getElementById("adde").removeAttribute("disabled");
     if(elncn >= 5) document.getElementById("addup").removeAttribute("disabled")
