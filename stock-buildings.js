@@ -1,6 +1,12 @@
 const stockBuildingsJsonStr = JSON.stringify([{
     "buildings": {
-        "en": [{
+        "en": [
+		{
+			"price": 10,
+			"name": "Beta-plus decay hastener",
+			"perSecond": 0.1,
+			"id": "betaPlusDecayHastener"
+		}, {
             "price": 100,
             "name": "Bubble chamber",
             "perSecond": 1,
@@ -42,6 +48,11 @@ const stockBuildingsJsonStr = JSON.stringify([{
             "id": "blackHoleSimChamber"
         }],
         "e": [{
+			"price": 10,
+			"name": "Clump of bismuth-210",
+			"perSecond": 0.1,
+			"id": "bismuthClump"
+		},{
             "price": 100,
             "name": "Radioactive beta decay machine",
             "perSecond": 1,
