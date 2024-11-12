@@ -1,5 +1,4 @@
-var prestigeCalc = (eln, elnn, up) => Math.max(Math.floor(Math.log(1 + Math.pow(10, -5 * Math.E) * elnn) + Math.log(1 + Math.pow(10, -2.5 * Math.E) * eln) + Math.log(1 + Math.pow(10, -7 * Math.E) * up)), 0);
-
+var prestigeCalc = (eln, elnn, up) => Math.max(Math.floor(eln/1e20+elnn/1.5e21+up/1e22),0);
 const calculatePriceIter = price => Math.floor(1.25 * price);
 /**
  * @function
@@ -36,7 +35,7 @@ document.getElementById("statsid").innerHTML += `
    	<input type='checkbox' onclick='if(this.checked) { prestigeButton.removeAttribute("disabled"); } else { prestigeButton.setAttribute("disabled", ""); }' />
     	<button disabled class='oxygen blackcol' id='prestigeButton' onclick='confirmPrestige();'>Prestige for poistrons</button>`;
 
-document.getElementById("prestigeval").innerHTML = prestigeLevel;
+document.getElementById("prestigeval").innerHTML = `${prestigeLevel} (+${prestigeLevel}% boost)`;
 
 const getCounts = id => buildingCounts[id] == undefined ? 0 : buildingCounts[id];
 
@@ -124,7 +123,7 @@ class BuildingEN {
   	 */
 	interval() {
 		window.setInterval(() => {
-			electronn(this.ps * Math.floor(1 + (prestigeLevel)));
+			electronn(this.ps * Math.floor(1 + (prestigeLevel/100)));
 			update();
 		}, 1000);
 	}
@@ -229,7 +228,7 @@ class BuildingE {
   	 */
 	interval() {
 		window.setInterval(() => {
-			elncn += this.ps * Math.floor(1 + (prestigeLevel));
+			elncn += this.ps * Math.floor(1 + (prestigeLevel/100));
 			update();
 		}, 1000);
 	}
@@ -332,7 +331,7 @@ class BuildingU {
   	 */
 	interval() {
 		window.setInterval(() => {
-			upcn += this.ps * Math.floor(1 + (prestigeLevel));
+			upcn += this.ps * Math.floor(1 + (prestigeLevel/100));
 			update();
 		}, 1000);
 	}
