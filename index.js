@@ -151,7 +151,7 @@ function update() { // update all the matter counters!
 	document.body.style.backgroundColor = "black", document.querySelectorAll(".end").forEach(e => e.style.display = "block");
     }, 200);
     updatePerSecond();
-    document.getElementById("prestigeButton").innerHTML = `Prestige for ${prestigeCalc(elncn, elnncn, upcn)} positrons`;
+    document.getElementById("prestigeButton").innerHTML = `Prestige for ${toUnitName(prestigeCalc(elncn, elnncn, upcn))} positrons`;
 }
 window.onload = () => { // once all the other things are ready
     beatenGame = "true" == localStorage.getItem("beaten_game");
