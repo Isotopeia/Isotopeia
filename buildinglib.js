@@ -102,7 +102,7 @@ class BuildingEN {
 			if (elnncn >= this.price) {
 				elnncn -= this.price;
 				this.price = calculatePrice(this.initPrice, this.count);
-				document.getElementById(this.id + "uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} V<sub>e</sub> | Count: ${this.count}`;
+				document.getElementById(this.id + "uc").innerHTML = `${toUnitName(calculatePrice(this.initPrice,this.count))} V<sub>e</sub> | Count: ${this.count}`;
 				document.getElementById(this.id).setAttribute("onclick", `new BuildingEN(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
 				this.interval();
 				buildingCounts[this.id]++;
@@ -136,7 +136,7 @@ class BuildingEN {
 		if (!(document.getElementById(this.id) == null || isModded)) return;
 		document.getElementById("upgr").innerHTML += `<p>
     <button id="${this.id}" disabled onclick=" new BuildingEN(${calculatePrice(this.initPrice,this.count)}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
-    <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${this.price} V<sub>e</sub> | Count: ${this.count}</span></p>
+    <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${toUnitName(this.price)} V<sub>e</sub> | Count: ${this.count}</span></p>
     </p>`;
 	}
 	/**
@@ -146,7 +146,7 @@ class BuildingEN {
 	refreshCount() {
 		this.count = getCounts(this.id);
 		this.price = calculatePrice(this.initPrice, this.count);
-		document.getElementById(this.id + "uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} V<sub>e</sub> | Count: ${this.count}`;
+		document.getElementById(this.id + "uc").innerHTML = `${toUnitName(calculatePrice(this.initPrice,this.count))} V<sub>e</sub> | Count: ${this.count}`;
 	}
 	/**
          * @method
@@ -207,7 +207,7 @@ class BuildingE {
 			if (elncn >= this.price) {
 				elncn -= this.price;
 				this.price = calculatePrice(this.initPrice, this.count);
-				document.getElementById(this.id + "uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}`;
+				document.getElementById(this.id + "uc").innerHTML = `${toUnitName(calculatePrice(this.initPrice,this.count))} e<sup>-</sup> | Count: ${this.count}`;
 				document.getElementById(this.id).setAttribute("onclick", `new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
 				this.interval();
 				buildingCounts[this.id]++;
@@ -241,7 +241,7 @@ class BuildingE {
 		if (!(document.getElementById(this.id) == null || isModded)) return;
 		document.getElementById("upgr").innerHTML += `<p>
 		<button id="${this.id}" disabled onclick="new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
-		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}</span></p>
+		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${toUnitName(calculatePrice(this.initPrice,this.count))} e<sup>-</sup> | Count: ${this.count}</span></p>
 		</p>`;
 	}
 	/**
@@ -251,7 +251,7 @@ class BuildingE {
 	refreshCount() {
 		this.count = getCounts(this.id);
 		this.price = calculatePrice(this.initPrice, this.count);
-		document.getElementById(this.id + "uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} e<sup>-</sup> | Count: ${this.count}`;
+		document.getElementById(this.id + "uc").innerHTML = `${toUnitName(calculatePrice(this.initPrice,this.count))} e<sup>-</sup> | Count: ${this.count}`;
 	}
 	/**
          * @method
@@ -311,7 +311,7 @@ class BuildingU {
 			if (upcn >= this.price) {
 				upcn -= this.price;
 				this.price = calculatePrice(this.initPrice, this.count);
-				document.getElementById(this.id + "uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}`;
+				document.getElementById(this.id + "uc").innerHTML = `${toUnitName(calculatePrice(this.initPrice,this.count))} u | Count: ${this.count}`;
 				document.getElementById(this.id).setAttribute("onclick", `new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();`);
 				this.interval();
 				buildingCounts[this.id]++;
@@ -344,7 +344,7 @@ class BuildingU {
 		if (!(document.getElementById(this.id) == null || isModded)) return;
 		document.getElementById("upgr").innerHTML += `<p>
 		<button id="${this.id}" disabled onclick=" new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
-		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}</span></p>
+		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${toUnitName(calculatePrice(this.initPrice,this.count))} u | Count: ${this.count}</span></p>
 		</p>`;
 	}
 	/**
@@ -354,7 +354,7 @@ class BuildingU {
 	refreshCount() {
 		this.count = getCounts(this.id);
 		this.price = calculatePrice(this.initPrice, this.count);
-		document.getElementById(this.id + "uc").innerHTML = `${calculatePrice(this.initPrice,this.count)} u | Count: ${this.count}`;
+		document.getElementById(this.id + "uc").innerHTML = `${toUnitName(calculatePrice(this.initPrice,this.count))} u | Count: ${this.count}`;
 	}
 	/**
          * @method
