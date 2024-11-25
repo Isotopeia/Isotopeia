@@ -22,7 +22,7 @@ var ran = false; // has load() been ran yet?
 var beatenGame = false; // have you beaten the game yet? If so, you won't get the "congrats" message again
 const unitList = [
 	"",
-	"",
+	"thousand",
 	"million",
 	"billion",
 	"trillion",
