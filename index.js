@@ -20,8 +20,42 @@ var ele = document.getElementById("bcham"), ctx = ele.getContext("2d"); // unuse
 var tosave = [], toload = [""], hooks = [], runners = [], buildingCounts = {}; // jtopia shenanigans
 var ran = false; // has load() been ran yet?
 var beatenGame = false; // have you beaten the game yet? If so, you won't get the "congrats" message again
-
-
+const unitList = [
+	"",
+	"",
+	"million",
+	"billion",
+	"trillion",
+	"quadrillion",
+	"quintillion",
+	"sextillion",
+	"septillion",
+	"octillion",
+	"nonillion",
+	"decillion",
+	"undecillion",
+	"duodecillion",
+	"tredecellion",
+	"quattuordecillion",
+	"quindecillion",
+	"sexdecillion",
+	"septendecillion",
+	"octodecillion",
+	"novemdecillion",
+	"vigintillion",
+	"unvigintillion",
+	"duovigintillion",
+	"trevigintillion",
+	"quattuorvigintillion",
+	"quinvigintillion",
+	"sexvigintillion",
+	"septenvigintillion",
+	"octovigintillion",
+	"nonvigintillion",
+	"trigintillion",
+	"untringintillion",
+	"duotrigintillion",
+	"tretrigintillion"]; // i'll add more if anyone makes a PR for above 10^102 lol
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
     	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); // currency counters
 	localStorage.setItem("pc", JSON.stringify([elnpc, elnnpc, uppc])); // per click
@@ -108,7 +142,7 @@ const electron = e => { elncn += e; update(); }; // add e electrons to count
 const upq = e => { upcn += e; update(); }; // add e upquarks to count
 
 function update() { // update all the matter counters!
-    document.getElementById("elnncnt").innerHTML = Math.floor(elnncn), document.getElementById("elncnt").innerHTML = Math.floor(elncn), document.getElementById("upqcnt").innerHTML = Math.floor(upcn);
+    document.getElementById("elnncnt").innerHTML = toUnitName(elnncn), document.getElementById("elncnt").innerHTML = toUnitName(elncn), document.getElementById("upqcnt").innerHTML = toUnitName(upcn);
     for (var e = 0; e < runners.length; e++) runners[e]();
     if(elnncn >= 2) document.getElementById("adde").removeAttribute("disabled");
     if(elncn >= 5) document.getElementById("addup").removeAttribute("disabled")
@@ -228,3 +262,5 @@ function updatePerSecond() {
 	elnnpc = 1+Math.floor(elnnps / 15);
 	uppc = 1+Math.floor(upps / 15);
 }
+
+const toUnitName = amt => `${(amt/Math.pow(10,Math.floor(Math.log10(amt)/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(amt)/3)]}`;
