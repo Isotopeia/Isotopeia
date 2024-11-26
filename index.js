@@ -96,8 +96,9 @@ function importSave(e) { // import from base64
     localStorage.setItem("verboseLogging", $[5])
     localStorage.setItem("pc", $[6]);
     // *then* update the current instance to localStorage
-    prestigeLevel = parseInt(localStorage.getItem("prestige"));
-    verboseLogging = JSON.parse(localStorage.getItem("verboseLogging"));
+    buildingCounts = $[4];
+    prestigeLevel = parseInt($[3]);
+    verboseLogging = JSON.parse($[5]);
     tryOrLog(load, "B64 load error!");
     update();
 }
