@@ -16,11 +16,12 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
  */
 function confirmPrestige() {
 	actuallySave = false;
-	localStorage.setItem("ucc", [0, 0, 0])
-	localStorage.setItem("upg", [0, 0, []])
-	localStorage.setItem("cst", [0, 0])
-	localStorage.setItem("tl", '[[""]]')
-	localStorage.setItem("counts", "{}")
+	localStorage.setItem("ucc", [0, 0, 0]);
+	localStorage.setItem("upg", [0, 0, []]);
+	localStorage.setItem("cst", [0, 0]);
+	localStorage.setItem("tl", '[[""]]');
+	localStorage.setItem("counts", "{}");
+	localStorage.setItem("jtopia",stockBuildingsJsonStr);
 	localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn, elnncn, upcn) : parseInt(localStorage.getItem("prestige")) + prestigeCalc(elncn, elnncn, upcn)).toLocaleString('fullwide', {
 		useGrouping: false
 	}));
