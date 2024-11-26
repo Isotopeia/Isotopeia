@@ -263,4 +263,4 @@ function updatePerSecond() {
 	uppc = 1+Math.floor(upps / 15);
 }
 
-const toUnitName = amt => `${(amt/Math.pow(10,Math.floor(Math.log10(Math.floor(amt))/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(Math.floor(amt))/3)]}`;
+const toUnitName = amt => amt === 0 ? "0" : (`${(amt/Math.pow(10,Math.floor(Math.log10(Math.floor(amt))/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(Math.floor(amt))/3)]}`);
