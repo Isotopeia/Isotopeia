@@ -25,7 +25,7 @@ function confirmPrestige() {
 	localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn, elnncn, upcn) : parseInt(localStorage.getItem("prestige")) + prestigeCalc(elncn, elnncn, upcn)).toLocaleString('fullwide', {
 		useGrouping: false
 	}));
-	location.reload();
+	load();
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
 
