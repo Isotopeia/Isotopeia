@@ -179,8 +179,8 @@ window.onload = () => { // once all the other things are ready
         }, "weird error in onload !ran loop, this is probably fine", Levels.VERBOSE);
 	JSON.parse(localStorage.getItem("nextonly")).forEach(e => eval(e)); // used in prestige for setting jtopia, only is ran next reload (hopefully)
         localStorage.setItem("nextonly","[]");
-	addItems();
 	load();
+    	addItems();
     }
     LoggerIso.logInfo(`${warnings} error(s) in try/catch, almost certainly fine`);
     if(elnncn === null) elnncn = 0;
