@@ -176,7 +176,9 @@ window.onload = () => { // once all the other things are ready
             let unique = [...new Set(tmp)];
             for (var n = 0; n < tmp.length; n++) eval(toload[tmp.lastIndexOf(unique[n])]).buildUI();
         }, "weird error in onload !ran loop, this is probably fine", Levels.VERBOSE);
-        addItems();
+	JSON.parse(localStorage.getItem("nextonly")).forEach(e => eval(e)); // used in prestige for setting jtopia, only is ran next reload (hopefully)
+        localStorage.setItem("nextonly","[]");
+	addItems();
 	load();
     }
     LoggerIso.logInfo(`${warnings} error(s) in try/catch, almost certainly fine`);
