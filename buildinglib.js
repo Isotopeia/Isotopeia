@@ -1,5 +1,7 @@
+var intervals = [];
 var prestigeCalc = (eln, elnn, up) => Math.max(Math.floor(eln/1e20+elnn/1.5e21+up/1e22),0);
 const calculatePriceIter = price => Math.floor(1.25 * price);
+const clearForReset = () => intervals.forEach(window.clearInterval);
 /**
  * @function
  * @param{number} initPrice - The starting the price of the building (as defined in the .json file)
@@ -16,6 +18,7 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
  */
 function confirmPrestige() {
 	save();
+	clearForReset();
 	actuallySave = false;
 	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
 	localStorage.setItem("upg", JSON.stringify([0, 0, []]));
@@ -125,10 +128,10 @@ class BuildingEN {
 	 * Creates an interval that updates your currency, and adds it to the total counter.
   	 */
 	interval() {
-		window.setInterval(() => {
+		intervals.push(window.setInterval(() => {
 			electronn(this.ps * Math.floor(1 + (prestigeLevel/100)));
 			update();
-		}, 1000);
+		}, 1000));
 	}
 	/**
          * @method
@@ -230,10 +233,10 @@ class BuildingE {
 	 * Creates an interval that updates your currency, and adds it to the total counter.
   	 */
 	interval() {
-		window.setInterval(() => {
+		intervals.push(window.setInterval(() => {
 			elncn += this.ps * Math.floor(1 + (prestigeLevel/100));
 			update();
-		}, 1000);
+		}, 1000));
 	}
 	/**
          * @method
@@ -333,10 +336,10 @@ class BuildingU {
 	 * Creates an interval that updates your currency, and adds it to the total counter.
   	 */
 	interval() {
-		window.setInterval(() => {
+		intervals.push(window.setInterval(() => {
 			upcn += this.ps * Math.floor(1 + (prestigeLevel/100));
 			update();
-		}, 1000);
+		}, 1000));
 	}
 	/**
          * @method
