@@ -17,9 +17,9 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
 function confirmPrestige() {
 	save();
 	actuallySave = false;
-	localStorage.setItem("ucc", [0, 0, 0]);
-	localStorage.setItem("upg", [0, 0, []]);
-	localStorage.setItem("cst", [0, 0]);
+	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
+	localStorage.setItem("upg", JSON.stringify([0, 0, []]));
+	localStorage.setItem("cst", JSON.stringify([0, 0]));
 	localStorage.setItem("tl", '[[""]]');
 	localStorage.setItem("counts", "{}");
 	localStorage.setItem("jtopia",stockBuildingsJsonStr);
