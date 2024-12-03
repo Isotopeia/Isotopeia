@@ -20,6 +20,7 @@ var ele = document.getElementById("bcham"), ctx = ele.getContext("2d"); // unuse
 var tosave = [], toload = [""], hooks = [], runners = [], buildingCounts = {}; // jtopia shenanigans
 var ran = false; // has load() been ran yet?
 var beatenGame = false; // have you beaten the game yet? If so, you won't get the "congrats" message again
+var dark = false;
 const unitList = [
 	"",
 	"thousand",
