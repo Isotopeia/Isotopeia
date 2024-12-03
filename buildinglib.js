@@ -15,6 +15,7 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
  * Confirms if you want to prestige, and then does it if you click Yes. This resets most things!
  */
 function confirmPrestige() {
+	save();
 	actuallySave = false;
 	localStorage.setItem("ucc", [0, 0, 0]);
 	localStorage.setItem("upg", [0, 0, []]);
