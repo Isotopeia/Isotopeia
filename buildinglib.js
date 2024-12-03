@@ -22,10 +22,10 @@ function confirmPrestige() {
 	localStorage.setItem("tl", '[[""]]');
 	localStorage.setItem("counts", "{}");
 	localStorage.setItem("jtopia",stockBuildingsJsonStr);
-	localStorage.setItem("nextonly",JSON.stringify(["parseToJs(stockBuildingsJsonStr);"]));
 	localStorage.setItem("prestige", (localStorage.getItem("prestige") == null ? prestigeCalc(elncn, elnncn, upcn) : parseInt(localStorage.getItem("prestige")) + prestigeCalc(elncn, elnncn, upcn)).toLocaleString('fullwide', {
 		useGrouping: false
 	}));
+	parseToJs(stockBuildingsJsonStr);
 	load();
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
