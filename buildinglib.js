@@ -32,6 +32,7 @@ function confirmPrestige() {
 	parseToJs(stockBuildingsJsonStr);
 	load();
 	prestigeLevel = JSON.parse(localStorage.getItem("prestige"));
+	document.getElementById("prestigeval").innerHTML = prestigeLevel;
 
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
