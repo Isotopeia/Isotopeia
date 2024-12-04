@@ -32,7 +32,7 @@ function confirmPrestige() {
 	parseToJs(stockBuildingsJsonStr);
 	load();
 	prestigeLevel = JSON.parse(localStorage.getItem("prestige"));
-	document.getElementById("prestigeval").innerHTML = prestigeLevel;
+	document.getElementById("prestigeval").innerHTML = toUnitName(prestigeLevel);
 
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
