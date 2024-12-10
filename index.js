@@ -125,7 +125,7 @@ const unitList = [
 	"novemnonagintillion",
 	"centillion",
 	"uncentillion",
-	"duouncentillion"]; // JS caps at 2^1024-2^971, or a bit below 2*10^308, so more than this is unnecessary
+	"duocentillion"]; // JS caps at 2^1024-2^971, or a bit below 2*10^308, so more than this is unnecessary
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
     	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); // currency counters
 	localStorage.setItem("pc", JSON.stringify([elnpc, elnnpc, uppc])); // per click
