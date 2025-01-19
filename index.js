@@ -20,7 +20,7 @@ var ele = document.getElementById("bcham"), ctx = ele.getContext("2d"); // unuse
 var tosave = [], toload = [""], hooks = [], runners = [], buildingCounts = {}; // jtopia shenanigans
 var ran = false; // has load() been ran yet?
 var beatenGame = false; // have you beaten the game yet? If so, you won't get the "congrats" message again
-var dark = false;
+var dark = false; // enable dark mode?
 const unitList = [
 	"",
 	"thousand",
@@ -246,7 +246,9 @@ window.onload = () => { // once all the other things are ready
             let unique = [...new Set(tmp)];
             for (var n = 0; n < tmp.length; n++) eval(toload[tmp.lastIndexOf(unique[n])]).buildUI();
         }, "weird error in onload !ran loop, this is probably fine", Levels.VERBOSE);
-	JSON.parse(localStorage.getItem("nextonly")).forEach(e => eval(e)); // used in prestige for setting jtopia, only is ran next reload (hopefully)
+	let nextonlyUnparsed = localStorage.getItem("nextonly");
+	nextonlyUnparsed = blankToZero(nextonlyUnparsed) ? nextonlyUnparsed : "[]";
+	JSON.parse(nextonlyUnparsed).forEach(e => eval(e)); // used in prestige for setting jtopia, only is ran next reload (hopefully)
         localStorage.setItem("nextonly","[]");
 	load();
     	addItems();
@@ -336,4 +338,4 @@ function updatePerSecond() {
 	uppc = 1+Math.floor(upps / 15);
 }
 
-const toUnitName = amt => Math.log10(amt)<0 ? "0" : (`${(amt/Math.pow(10,Math.floor(Math.log10(Math.floor(amt))/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(Math.floor(amt))/3)]}`);
+const toUnitName = amt => Math.log10(amt)<0 ? "0" : (`${(amt/Math.pow(10,Math.floor(Math.log10(Math.floor(amt))/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(Math.floor(amt))/3)]}`); // convert numbers greater than 1e+3, e.g. 2147483647 to something like 2.147 billion
