@@ -1,5 +1,5 @@
 <div align="center"><img src="img/logolong.png" style="height: 5rem;" /><br />
-<img src="https://github.com/Isotopeia/Isotopeia/actions/workflows/main.yml/badge.svg" />&nbsp;<a href="https://isotopeia.matthy.dev/sysinfo.html"><img src="https://img.shields.io/badge/latest_version-v1.12.3-lime" /></a>&nbsp;<a href="https://matthy.dev/w/index.php/Isotopeia:Main_Page"><img src="https://img.shields.io/website?url=https%3A%2F%2Fmatthy.dev&up_message=up&up_color=down&label=wiki&link=https%3A%2F%2Fmatthy.dev%2Fw%2F" /></a></div>
+<img src="https://github.com/Isotopeia/Isotopeia/actions/workflows/main.yml/badge.svg" />&nbsp;<a href="https://isotopeia.matthy.dev/sysinfo.html"><img src="https://img.shields.io/badge/latest_version-v1.12.4-lime" /></a>&nbsp;<a href="https://matthy.dev/w/index.php/Isotopeia:Main_Page"><img src="https://img.shields.io/website?url=https%3A%2F%2Fmatthy.dev&up_message=up&up_color=down&label=wiki&link=https%3A%2F%2Fmatthy.dev%2Fw%2F" /></a></div>
 <hr />
 Welcome to Isotopeia, a clicker game based off of a terrible misunderstanding of particle physics and a general carelessness not to learn more about it.
 <h2>For players</h2>
