@@ -21,6 +21,18 @@ var tosave = [], toload = [""], hooks = [], runners = [], buildingCounts = {}; /
 var ran = false; // has load() been ran yet?
 var beatenGame = false; // have you beaten the game yet? If so, you won't get the "congrats" message again
 var dark = false; // enable dark mode?
+var psEach;
+var onloadHooks = [
+	() => { jtParsed = applyBuildingUpdates() && combineModBuildings(blankToZero(JSON.parse(localStorage.getItem("jtopia")),[])); },
+	() => {  
+		psEach = {
+			"e": getPS(jtParsed, "e"),
+			"en": getPS(jtParsed, "en"),
+			"u": getPS(jtParsed, "u")
+		}
+	}
+];
+
 const unitList = [
 	"",
 	"thousand",
@@ -125,7 +137,18 @@ const unitList = [
 	"novemnonagintillion",
 	"centillion",
 	"uncentillion",
-	"duocentillion"]; // JS caps at 2^1024-2^971, or a bit below 2*10^308, so more than this is unnecessary
+	"duocentillion"
+]; // JS caps at 2^1024-2^971, or a bit below 2*10^308, so more than this is unnecessary
+
+const electronn = e => { elnncn += e; update(); }; // add e electron neutrinos to count
+const electron = e => { elncn += e; update(); }; // add e electrons to count
+const upq = e => { upcn += e; update(); }; // add e upquarks to count
+const blankToZero = (v,overrideValue=0) => [null,undefined,NaN].includes(v) ? overrideValue : v;
+const getPS = (obj,typ) => obj.buildings[typ].reduce((obj, item) => Object.assign(obj, {[item.id]: item.perSecond}), {});
+const getGainWithCounts = (prices,counts) => Object.keys(prices).map(pID => blankToZero(prices[pID])*blankToZero(counts[pID])).reduce((a,b) => a+b);
+let jtParsed;
+const getPriciestBuilding = (jsonData, type="en") => jsonData.buildings[type].sort((a,b) => b.price-a.price)[0]; // use with combineModBuildings
+const toUnitName = amt => Math.log10(amt)<0 ? "0" : (`${(amt/Math.pow(10,Math.floor(Math.log10(Math.floor(amt))/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(Math.floor(amt))/3)]}`); // convert numbers greater than 1e+3, e.g. 2147483647 to something like 2.147 billion
 function save() { // localStorage `tl` is deprecated, don't use, replaced with buildingCounts
     	localStorage.setItem("ucc", JSON.stringify([elncn, elnncn, upcn])); // currency counters
 	localStorage.setItem("pc", JSON.stringify([elnpc, elnnpc, uppc])); // per click
@@ -208,9 +231,15 @@ function load() { // load from localStorage
     update();
 }
 
-const electronn = e => { elnncn += e; update(); }; // add e electron neutrinos to count
-const electron = e => { elncn += e; update(); }; // add e electrons to count
-const upq = e => { upcn += e; update(); }; // add e upquarks to count
+function updatePerSecond() {
+	elnps = getGainWithCounts(psEach.e, buildingCounts)*(1+prestigeLevel);
+	elnnps = getGainWithCounts(psEach.en, buildingCounts)*(1+prestigeLevel);
+	upps = getGainWithCounts(psEach.u, buildingCounts)*(1+prestigeLevel);
+	elnpc = 1+Math.floor(elnps / 15);
+	elnnpc = 1+Math.floor(elnnps / 15);
+	uppc = 1+Math.floor(upps / 15);
+}
+
 
 function update() { // update all the matter counters!
     document.getElementById("elnncnt").innerHTML = toUnitName(elnncn), document.getElementById("elncnt").innerHTML = toUnitName(elncn), document.getElementById("upqcnt").innerHTML = toUnitName(upcn);
@@ -228,6 +257,9 @@ window.onload = () => { // once all the other things are ready
     beatenGame = "true" == localStorage.getItem("beaten_game");
     var to, x = 0;
     var warnings = 0;
+	migrationProcessor(localStorage.getItem("version"));
+    document.getElementById("titleHTML").innerHTML=`Isotopeia - ${mostRecentVersion}`;
+    	onloadHooks.forEach(a => a());
     if (!ran) {
         var ucc = JSON.parse(localStorage.getItem("ucc"));
         elncn = blankToZero(ucc[0]);
@@ -253,12 +285,12 @@ window.onload = () => { // once all the other things are ready
 	load();
     	addItems();
     }
-    LoggerIso.logInfo(`${warnings} error(s) in try/catch, almost certainly fine`);
+    LoggerIso.logInfo(`${warnings} error(s) in try/catch during window.onload, almost certainly fine`);
     if(elnncn === null) elnncn = 0;
+
+	uniqueItems.forEach(e => e.refreshIntervals());
     update();
-    migrationProcessor(localStorage.getItem("version"));
-    document.getElementById("titleHTML").innerHTML=`Isotopeia - ${mostRecentVersion}`;
-    uniqueItems.forEach(e => e.refreshIntervals());
+    
 };
 function addItems() { // load the jtopia upgrades
     for (var e = 0; e < hooks.length; e++) hooks[e].buildUI();
@@ -286,6 +318,8 @@ window.onbeforeunload = () => {
 function migrationProcessor(version) { // migrate from older versions
 	if(version == null || version == undefined) { // oldest/pre-v1.10.0-->v1.11.0+ migration, these versions are really old, the commented solution works but can cause issues with NaN Ve counts
 		LoggerIso.logWarn("Migrating from pre-v1.10.0 (resetting!)");
+		LoggerIso.logWarn("Here's your save as backup:");
+		console.log(exportSave());
 		resetNoconfirm();
 		/*LoggerIso.logInfo("Migrating from v1.10.0...");
 		countAll();
@@ -298,10 +332,10 @@ function migrationProcessor(version) { // migrate from older versions
 	return location.reload();
 }
 
-const getPriciestBuilding = (jsonData, type="en") => jsonData.buildings[type].sort((a,b) => b.price-a.price)[0]; // use with combineModBuildings
+
 
 function combineModBuildings(modsArray) { // combine buildings attributes in JSON into 1 mod
-    if(modsArray.length === 1) return modsArray[0];
+    if(modsArray.length <= 1) return modsArray[0];
     const buildings = modsArray.map(e => e.buildings);
     const newObj = {"buildings":{"en":[],"e":[],"u":[]}, "customBehaviors":""};
     Object.keys(buildings[0]).forEach(buildingType => {
@@ -320,22 +354,8 @@ function buildingUpdateNeeded() { // do we need to migrate buildings to new vers
 	   || updatedPriciest.e.id != priciest.e.id
 	   || updatedPriciest.u.id != priciest.u.id; // TODO: add logic for mods which have pricier buildings, which breaks current method
 }
-const blankToZero = v => [null,undefined,NaN].includes(v) ? 0 : v;
-const getPS = (obj,typ) => obj.buildings[typ].reduce((obj, item) => Object.assign(obj, {[item.id]: item.perSecond}), {});
-const getGainWithCounts = (prices,counts) => Object.keys(prices).map(pID => blankToZero(prices[pID])*blankToZero(counts[pID])).reduce((a,b) => a+b);
-const jtParsed = combineModBuildings(JSON.parse(localStorage.getItem("jtopia")));
-const psEach = {
-	"e": getPS(jtParsed, "e"),
-	"en": getPS(jtParsed, "en"),
-	"u": getPS(jtParsed, "u")
-};
-function updatePerSecond() {
-	elnps = getGainWithCounts(psEach.e, buildingCounts)*(1+prestigeLevel);
-	elnnps = getGainWithCounts(psEach.en, buildingCounts)*(1+prestigeLevel);
-	upps = getGainWithCounts(psEach.u, buildingCounts)*(1+prestigeLevel);
-	elnpc = 1+Math.floor(elnps / 15);
-	elnnpc = 1+Math.floor(elnnps / 15);
-	uppc = 1+Math.floor(upps / 15);
+function applyBuildingUpdates() {
+	if(!buildingUpdateNeeded()) return true;
+	localStorage.setItem("jtopia", stockBuildingsJsonStr);
+	return true;
 }
-
-const toUnitName = amt => Math.log10(amt)<0 ? "0" : (`${(amt/Math.pow(10,Math.floor(Math.log10(Math.floor(amt))/3)*3)).toFixed(3)} ${unitList[Math.floor(Math.log10(Math.floor(amt))/3)]}`); // convert numbers greater than 1e+3, e.g. 2147483647 to something like 2.147 billion
