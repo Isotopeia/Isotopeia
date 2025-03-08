@@ -2,6 +2,7 @@ var intervals = [];
 var prestigeCalc = (eln, elnn, up) => Math.max(Math.floor(eln/1e20+elnn/1.5e21+up/1e22),0);
 const calculatePriceIter = price => Math.floor(1.25 * price);
 const clearForReset = () => intervals.forEach(window.clearInterval);
+const clearUpgrades = () => document.getElementById("upgr").innerHTML = `<h1>Upgrades</h1><input type="number" placeholder="Buy #" id="buyAmount" class="blackcol oxygen buy-number" value="1" />`;
 /**
  * @function
  * @param{number} initPrice - The starting the price of the building (as defined in the .json file)
@@ -19,6 +20,7 @@ const calculatePrice = (initPrice, purchased) => { // run floor(1.25*initPrice) 
 function confirmPrestige() {
 	save();
 	clearForReset();
+	clearUpgrades();
 	actuallySave = false;
 	localStorage.setItem("ucc", JSON.stringify([0, 0, 0]));
 	localStorage.setItem("upg", JSON.stringify([0, 0, []]));
@@ -36,15 +38,15 @@ function confirmPrestige() {
 
 }
 var prestigeLevel = localStorage.getItem("prestige") == null ? 0 : parseInt(localStorage.getItem("prestige"));
-
+/*
 document.getElementById("statsid").innerHTML += `
 	<h2>Prestige</h2>
  	Positrons: 
   	<span id='prestigeval'>0</span> <br />
    	<input type='checkbox' onclick='if(this.checked) { prestigeButton.removeAttribute("disabled"); } else { prestigeButton.setAttribute("disabled", ""); }' />
     	<button disabled class='oxygen blackcol' id='prestigeButton' onclick='confirmPrestige();'>Prestige for poistrons</button>`;
-
-document.getElementById("prestigeval").innerHTML = `${toUnitName(prestigeLevel)} (+${toUnitName(prestigeLevel)}% boost)`;
+*/
+onloadHooks.push(() => { document.getElementById("prestigeval").innerHTML = `${toUnitName(prestigeLevel)} (+${toUnitName(prestigeLevel)}% boost)`; });
 
 const getCounts = id => buildingCounts[id] == undefined ? 0 : buildingCounts[id];
 
@@ -144,7 +146,7 @@ class BuildingEN {
 	buildUI(isModded = false) {
 		if (!(document.getElementById(this.id) == null || isModded)) return;
 		document.getElementById("upgr").innerHTML += `<p>
-    <button id="${this.id}" disabled onclick=" new BuildingEN(${calculatePrice(this.initPrice,this.count)}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
+    <button class="purchasable" id="${this.id}" disabled onclick=" new BuildingEN(${calculatePrice(this.initPrice,this.count)}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
     <p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${toUnitName(this.price)} V<sub>e</sub> | Count: ${this.count}</span></p>
     </p>`;
 	}
@@ -249,7 +251,7 @@ class BuildingE {
 	buildUI(isModded = false) {
 		if (!(document.getElementById(this.id) == null || isModded)) return;
 		document.getElementById("upgr").innerHTML += `<p>
-		<button id="${this.id}" disabled onclick="new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
+		<button class="purchasable" id="${this.id}" disabled onclick="new BuildingE(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
 		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${toUnitName(calculatePrice(this.initPrice,this.count))} e<sup>-</sup> | Count: ${this.count}</span></p>
 		</p>`;
 	}
@@ -352,7 +354,7 @@ class BuildingU {
 	buildUI(isModded = false) {
 		if (!(document.getElementById(this.id) == null || isModded)) return;
 		document.getElementById("upgr").innerHTML += `<p>
-		<button id="${this.id}" disabled onclick=" new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
+		<button class="purchasable" id="${this.id}" disabled onclick=" new BuildingU(${this.initPrice}, '${this.name}', ${this.ps}, '${this.id}').buy(parseInt(buyAmount.value));  update();" style="display: none;">${this.name}</button>
 		<p id="${this.id}2" style="display: none;">Cost: <span id="${this.id}uc">${toUnitName(calculatePrice(this.initPrice,this.count))} u | Count: ${this.count}</span></p>
 		</p>`;
 	}

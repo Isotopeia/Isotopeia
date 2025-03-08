@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-US">
 	<head>
@@ -30,10 +31,14 @@
 			</div>
 			<div class="stats" id="statsid">
 				<h1>Stats</h1>
-				<h2>Clickable</h2>
-				<p><span id="elnncnt">0</span> V<sub>e</sub></p>
-				<p><span id="elncnt">0</span> e<sup>-</sup></p>
-				<p><span id="upqcnt">0</span> u</p>
+				<p class="clickable-count-container"><span id="elnncnt">0</span> V<sub>e</sub></p>
+				<p class="clickable-count-container"><span id="elncnt">0</span> e<sup>-</sup></p>
+				<p class="clickable-count-container"><span id="upqcnt">0</span> u</p>
+				<h2>Prestige</h2>
+			 	Positrons: 
+			  	<span id='prestigeval'>0</span> <br />
+			   	<input type='checkbox' onclick='if(this.checked) { prestigeButton.removeAttribute("disabled"); } else { prestigeButton.setAttribute("disabled", ""); }' />
+			    	<button disabled class='oxygen blackcol' id='prestigeButton' onclick='confirmPrestige();'>Prestige for poistrons</button>
 			</div>
 			<div class="sysinfo" id="sysid">
 				<div class="main-system-info">
