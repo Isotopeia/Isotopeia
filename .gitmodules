@@ -1,0 +1,3 @@
+[submodule "Isotopeia-dev"]
+	path = Isotopeia-dev
+	url = git@github.com:Isotopeia/Isotopeia-dev.git

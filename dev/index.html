@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title id="titleHTML">Isotopeia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style-grid.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500;600;700;800&family=Oxygen+Mono&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://raw.githubusercontent.com/tachyons-css/tachyons/master/css/tachyons.min.css">
+	</head>
+	<body>
+		<div class="game oxygen container">
+			<div class="main">
+				<div class="matter">
+					<h1 class="weight-eb matter-title">Matter</h1>
+					<div class="gain-clickable">
+						<button class="oxygen gain-clickable-button" id="elnncnplus" onclick='electronn(elnnpc);'>V<sub>e</sub></button>
+						<br />
+						<button class="oxygen gain-clickable-button" id="adde" disabled onclick="electron(elnpc);">e<sup>-</sup></button>
+						<br />
+						<button class="oxygen gain-clickable-button" id="addup" disabled onclick="upq(uppc);">u</button>
+					</div>
+				</div>
+				<div id="upgr" class="upgrades">
+					<h1>Upgrades</h1>
+					<input type="number" placeholder="Buy #" id="buyAmount" class="blackcol oxygen buy-number" value="1" />
+				</div>
+			</div>
+			<div class="stats" id="statsid">
+				<h1>Stats</h1>
+				<p class="clickable-count-container"><span id="elnncnt">0</span> V<sub>e</sub></p>
+				<p class="clickable-count-container"><span id="elncnt">0</span> e<sup>-</sup></p>
+				<p class="clickable-count-container"><span id="upqcnt">0</span> u</p>
+			</div>
+			<div class="sysinfo" id="sysid">
+				<div class="main-system-info">
+					<h1>System info</h1>
+					<ul>
+						<li><a href="sysinfo.html">Update history</a></li>
+						<li><a href="https://github.com/Isotopeia/Isotopeia/wiki/Getting-Started">Getting Started guide</a></li>
+						<li><a href="https://github.com/Isotopeia/IsotopeiaMods">Mod repository</a></li>
+						<li><a href="devlog.html">Devlog</a></li>
+					</ul>
+				</div>
+				<div id="optionsmenu" class="options">
+					<h1>Options</h1>
+					<button class="blackcol oxygen" onclick="dark=!dark;if(dark){document.body.classList.add('dark')}else{document.body.classList.remove('dark')}">Toggle dark mode</button>
+					<br />
+					<button class="blackcol oxygen" onclick="save();">Save</button>
+					<br />
+					<button class="blackcol oxygen" onclick="load();">Load</button>
+					<br />
+					<input class="blackcol oxygen" type="text" id="modjson" />
+					<button onclick="parseToJs(document.getElementById('modjson').value)" class="blackcol oxygen">Add mods</button>
+					<br />
+					<input type="checkbox" id="resetcheckbox" autocomplete="off" onclick="if(this.checked) { document.getElementById('resetbutton').removeAttribute('disabled'); } else { document.getElementById('resetbutton').setAttribute('disabled',''); }"/>
+					<button id="resetbutton" disabled onclick="resetNoconfirm();" class="redcol oxygen">Reset</button><br />
+					<button class="blackcol oxygen" onclick="document.getElementById('saveExportImport').value = exportSave();">Export save</button><br />
+					<button class="blackcol oxygen"  onclick="importSave(document.getElementById('saveExportImport').value)">Import save</button>
+					<br />
+					<input class="blackcol oxygen" type="text" placeholder="Save import/export string" id="saveExportImport" />
+					<br />
+				</div>
+			</div>
+			<div class="bubble-chamber">
+				<canvas id="bcham">Your browser does not support the bubble chamber view.</canvas>
+			</div>
+		</div>
+		<div class="end">
+			<p style="color: white;">You've done it. You've actually done it. I honestly thought no one would get here, but you did. gg.<br /> -mechanikate</p>
+			<br />
+			<button onclick="confirmReset();" style="color: red;">Reset</button><br /><button onclick="beatenGame=true;save();location.reload();">Continue endlessly</button>
+		</div>
+	</body>
+	<!-- include index at end -->
+	<script src="logging.js"></script>
+	<script src="stock-buildings.js"></script>
+	<script src="jtopia.js"></script>
+	<script src="index.js"></script>
+	<script src="buildinglib.js"></script>
+</html>
+

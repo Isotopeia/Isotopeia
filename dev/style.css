@@ -1,0 +1,64 @@
+.end {
+	display: none;
+}
+.oxygen {
+	font-family: 'Oxygen Mono', monospace;
+}
+.weight-r {
+	font-weight: normal;
+}
+.weight-b {
+	font-weight: bold;
+}
+.weight-b {
+	font-weight: 900;
+}
+.gain-clickable-button {
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+    color: black;
+}
+button {
+    touch-action: manipulation;
+}
+
+.gain-clickable-button:active {
+	background-color: gray;
+}
+.gain-clickable-button:disabled {
+	background-color: darkgray;
+}
+.dark {
+	background-color: black;
+	color: white;
+}
+a.dark {
+	background-color: black;
+	color: turquoise;
+}
+.frf {
+    position: fixed;
+}
+.blackcol {
+    color: black;
+}
+.buy-number {
+    width: 25%;
+}
+
+.redcol {
+    color: red;
+}
+
+
+@media (max-resolution: 1dppx) {
+    .gain-clickable-button {
+    	width: 75px;
+    	height: 75px;
+    	font-size: 200%;
+    	background-color: black;
+    	color: white;
+    	border: 2px solid gray;
+    }
+}
